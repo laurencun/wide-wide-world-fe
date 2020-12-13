@@ -1,13 +1,51 @@
-import React from 'react'
-// import { Route, Switch } from 'react-router-dom';
-// import { BrowserRouter } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, Switch, withRouter} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { currentUser } from './actions/auth'
+import Login from './components/Login';
+import Signup from './components/Signup';
+import PostContainer from './components/PostContainer';
+import { connect } from 'react-redux'
 
-function App() {
+
+class App extends Component {
+
+  componentDidMount(){
+    const token = localStorage.getItem('my_app_token')
+
+    if (!token) {
+      this.props.history.push('/')
+    } else {
+
+      const reqObj = {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+      fetch('http://localhost:3000/current_user', reqObj)
+      .then(resp => resp.json())
+      .then(data => {
+        this.props.currentUser(data)
+      })
+    }
+  }
+
+  render(){
+
   return (
     <div>
-      
+      <Router>
+        <Switch>
+        <Route exact path='/' component={Login}/>
+        <Route exact path='/signup' component={Signup}/>
+        <Route exact path='/home' component={PostContainer}/>
+        </Switch>
+      </Router>
     </div>
   );
+  }
 }
 
-export default App;
+export default connect(null, {currentUser})(withRouter(App))
