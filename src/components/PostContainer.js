@@ -4,6 +4,8 @@ import Post from './Post'
 import Navbar from './Navbar'
 import NewPostForm from './NewPostForm'
 import {fetchPosts} from '../actions/post_actions'
+import {addLikes} from '../actions/like_actions'
+import {addToSaved} from '../actions/saved_actions'
 import {currentUser, logoutUser} from '../actions/auth'
 
 class PostContainer extends Component {
@@ -43,11 +45,11 @@ class PostContainer extends Component {
 
 
     showPostForm = () => {
-      {this.state.showForm === false ? 
+      { this.state.showForm === false ? 
         this.setState({
           showForm : true
       })
-      :this.setState({
+      : this.setState({
           showForm : false
       })
       }
@@ -62,7 +64,7 @@ class PostContainer extends Component {
                 <NewPostForm />
                 : null}
                 {this.props.posts.map (post => 
-                    <Post key={post.id} post={post} user={post.user} comments={post.comments} likes={post.likes}/>
+                    <Post key={post.id} post={post} user={post.user} comments={post.comments} likes={post.likes} addLikes={this.props.addLikes} addToSaved={this.props.addToSaved}/>
                     )}
             </div>
         )
@@ -74,4 +76,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {fetchPosts, currentUser, logoutUser })(PostContainer)
+export default connect(mapStateToProps, {addToSaved, addLikes, fetchPosts, currentUser, logoutUser })(PostContainer)

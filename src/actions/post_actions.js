@@ -15,7 +15,7 @@ export const fetchPosts = () => dispatch => {
 }
 
 export const new_post_success = (post) => dispatch => {
-    
+
     const reqObj = {
         method: 'POST',
         headers: {
@@ -24,9 +24,10 @@ export const new_post_success = (post) => dispatch => {
         body: JSON.stringify(post)
       }
   
-      fetch('http://localhost:3000/posts', reqObj)
+      fetch(POST_URL, reqObj)
       .then(resp => resp.json())
-      .then(post => dispatch({
+      .then(post => 
+        dispatch({
         type: NEW_POST_SUCCESS,
         post
       })

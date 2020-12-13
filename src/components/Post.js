@@ -1,21 +1,33 @@
-import React from 'react'
+import {Component} from 'react'
 import Comment from './Comment'
 import Like from './Like'
+import {connect} from 'react-redux'
 
-export default function Post ({post}) {
+
+class Post extends Component {
+
+    render(){
 
     return (
         <div>
-            <span style={{fontWeight:'bold'}}>{post.user.username}</span><br/>
-            <img width={500} src={post.image} alt={post.caption}/><br/>
-            <span>{post.caption}</span><br/>
-            <span style={{fontStyle:'italic'}}>{post.location}</span><br/>
-            <span> <Like likes={post.likes}/> </span>
+            <span style={{fontWeight:'bold'}}>{this.props.post.user.username}</span><br/>
+            <img width={500} src={this.props.post.image} alt={this.props.post.caption}/><br/>
+            <span>{this.props.post.caption}</span><br/>
+            <span style={{fontStyle:'italic'}}>{this.props.post.location}</span><br/>
+            <span> <Like likes={this.props.post.likes}/> </span>
             <ul>
-                {post.comments.map((commentArray, index) => <Comment key={index} comments={commentArray} />)}
+                {this.props.post.comments.map((commentArray, index) => <Comment key={index} comments={commentArray} />)}
             </ul>
-            <button>like</button>
-            <button>save</button>
+            <button onClick={() => this.props.addLikes(this.props.post, this.props.auth.user)}>like</button>
+            <button onClick={()=> this.props.addToSaved(this.props.post, this.props.auth.user)}>save</button>
         </div>
     )
 }
+
+}
+
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps)(Post)
