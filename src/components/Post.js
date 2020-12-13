@@ -2,9 +2,32 @@ import {Component} from 'react'
 import Comment from './Comment'
 import Like from './Like'
 import {connect} from 'react-redux'
+import {addComment} from '../actions/comment_actions'
 
 
 class Post extends Component {
+    state = {
+        content: ''
+    }
+
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    addComment = event => {
+        event.preventDefault()
+        const comment = {
+            user_id: this.props.auth.user.id,
+            post_id:  this.props.post.id,
+            content: this.state.content
+        }
+        this.props.addComment(comment)
+        this.setState({
+            content: ''
+        })
+    }
 
     render(){
 
@@ -15,11 +38,15 @@ class Post extends Component {
             <span>{this.props.post.caption}</span><br/>
             <span style={{fontStyle:'italic'}}>{this.props.post.location}</span><br/>
             <span> <Like likes={this.props.post.likes}/> </span>
+            <button onClick={() => this.props.addLikes(this.props.post, this.props.auth.user)}>like</button>
+            <button onClick={()=> this.props.addToSaved(this.props.post, this.props.auth.user)}>save</button>
             <ul>
                 {this.props.post.comments.map((commentArray, index) => <Comment key={index} comments={commentArray} />)}
             </ul>
-            <button onClick={() => this.props.addLikes(this.props.post, this.props.auth.user)}>like</button>
-            <button onClick={()=> this.props.addToSaved(this.props.post, this.props.auth.user)}>save</button>
+            <form onSubmit={this.addComment}>
+                <input onChange={this.handleChange} type='text' name='content' value={this.state.content} />    
+                <button type='submit'>comment</button>
+            </form>
         </div>
     )
 }
@@ -30,4 +57,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps)(Post)
+export default connect(mapStateToProps, {addComment})(Post)
