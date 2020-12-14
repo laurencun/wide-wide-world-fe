@@ -31,6 +31,8 @@ class Post extends Component {
 
     render(){
 
+        console.log(this.props.post, 'in post component')
+
     return (
         <div>
             <span style={{fontWeight:'bold'}}>{this.props.post.user.username}</span><br/>

@@ -1,32 +1,24 @@
-import React, { Component } from 'react'
-import { logoutUser } from '../actions/auth'
-import { connect } from 'react-redux';
+import React from 'react'
+import {useLocation} from 'react-router-dom'
 
+export default function Navbar (props) {
 
-class Navbar extends Component {
-
-    
-    render() {
+    const location = useLocation()
 
         return (
             <div>
                 <nav>
                     <ul>
-                        <li>my profile</li>
-                        <li onClick={this.props.showPostForm}>new post</li>
-                        <li onClick={this.props.logout}>logout</li>
+                        {
+                        location.pathname === '/home' ?
+                        <li onClick={props.showProfile}>my profile</li>
+                        : <ul><li onClick={props.showFeed}>back to feed</li>
+                        <li onClick={props.showSaved}>show saved</li></ul>
+                        }
+                        <li onClick={props.showPostForm}>new post</li>
+                        <li onClick={props.logout}>logout</li>
                     </ul>
                 </nav>
             </div>
         )
     }
-}
-
-const mapStateToProps = (state) => {
-    return {
-      auth: state.auth
-    }
-  }
-  
-  
-  export default connect(mapStateToProps, { logoutUser })(Navbar)

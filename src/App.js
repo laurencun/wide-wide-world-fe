@@ -5,6 +5,8 @@ import { currentUser } from './actions/auth'
 import Login from './components/Login';
 import Signup from './components/Signup';
 import PostContainer from './components/PostContainer';
+import Profile from './components/Profile';
+import Saved from './components/Saved';
 import { connect } from 'react-redux'
 
 
@@ -41,6 +43,8 @@ class App extends Component {
         <Route exact path='/' component={Login}/>
         <Route exact path='/signup' component={Signup}/>
         <Route exact path='/home' component={PostContainer}/>
+        <Route exact path='/profile' component={Profile}/>
+        <Route exact path='/saved' component={Saved}/>
         </Switch>
       </Router>
     </div>

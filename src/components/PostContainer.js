@@ -3,10 +3,11 @@ import {connect} from 'react-redux'
 import Post from './Post'
 import Navbar from './Navbar'
 import NewPostForm from './NewPostForm'
-import {fetchPosts} from '../actions/post_actions'
+import {fetchPosts, userPosts, savedPosts} from '../actions/post_actions'
 import {addLikes} from '../actions/like_actions'
 import {addToSaved} from '../actions/saved_actions'
 import {currentUser, logoutUser} from '../actions/auth'
+import {withRouter} from 'react-router-dom'
 
 class PostContainer extends Component {
 
@@ -15,6 +16,7 @@ class PostContainer extends Component {
     }
 
     componentDidMount(){
+
         const token = localStorage.getItem('my_app_token')
     
         if (!token) {
@@ -34,7 +36,14 @@ class PostContainer extends Component {
             this.props.currentUser(data)
           })
         }
-        this.props.fetchPosts();
+
+        this.props.fetchPosts()
+
+        if (window.location.href.split('/')[3] === 'profile') { 
+            this.props.userPosts(this.props.auth.user.id)}
+        else if (window.location.href.split('/')[3] === 'saved') {
+          this.props.savedPosts(this.props.auth.user.id)}
+        else {return null}
       }
 
       logout = () => {
@@ -55,17 +64,29 @@ class PostContainer extends Component {
       }
     }
 
+    showProfile = () => {
+        this.props.history.push('/profile')
+    }
+
+    showFeed = () => {
+        this.props.history.push('/home')
+    }
+
+    showSaved = () => {
+        this.props.history.push('/saved')
+    }
+
     render() {
 
         return (
             <div>
-                <Navbar logout={this.logout} showPostForm={this.showPostForm}/>
+                <Navbar logout={this.logout} showPostForm={this.showPostForm} showProfile={this.showProfile} showSaved={this.showSaved} showFeed={this.showFeed}/>
                 {this.state.showForm === true ? 
                 <NewPostForm />
                 : null}
                 {this.props.posts.map (post => 
-                    <Post key={post.id} post={post} user={post.user} comments={post.comments} likes={post.likes} addLikes={this.props.addLikes} addToSaved={this.props.addToSaved}/>
-                    )}
+                <Post key={post.id} post={post} user={post.user} comments={post.comments} likes={post.likes} addLikes={this.props.addLikes} addToSaved={this.props.addToSaved}/>
+                )}
             </div>
         )
     }
@@ -76,4 +97,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {addToSaved, addLikes, fetchPosts, currentUser, logoutUser })(PostContainer)
+export default connect(mapStateToProps, {addToSaved, addLikes, fetchPosts, userPosts, savedPosts, currentUser, logoutUser })(withRouter(PostContainer))
