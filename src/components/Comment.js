@@ -3,10 +3,10 @@ import React from 'react'
 export default function Comment({comments}) {
 
     return (
-        <div>
-            <li>
+        <>
+            <li style={{listStyle:'none'}}>
                 {comments.content}
             </li>
-        </div>
+        </>
     )
 }
