@@ -3,11 +3,12 @@ import {connect} from 'react-redux'
 import Post from './Post'
 import Navbar from './Navbar'
 import NewPostForm from './NewPostForm'
-import {fetchPosts, userPosts, savedPosts} from '../actions/post_actions'
+import {fetchPosts, userPosts} from '../actions/post_actions'
 import {addLikes} from '../actions/like_actions'
 import {addToSaved} from '../actions/saved_actions'
 import {currentUser, logoutUser} from '../actions/auth'
 import {withRouter} from 'react-router-dom'
+import { Grid, Segment } from 'semantic-ui-react'
 
 class PostContainer extends Component {
 
@@ -41,8 +42,8 @@ class PostContainer extends Component {
 
         if (window.location.href.split('/')[3] === 'profile') { 
             this.props.userPosts(this.props.auth.user.id)}
-        else if (window.location.href.split('/')[3] === 'saved') {
-          this.props.savedPosts(this.props.auth.user.id)}
+        // else if (window.location.href.split('/')[3] === 'saved') {
+        //   this.props.savedPosts(this.props.auth.user.id)}
         else {return null}
       }
 
@@ -84,9 +85,14 @@ class PostContainer extends Component {
                 {this.state.showForm === true ? 
                 <NewPostForm />
                 : null}
+
+            <Grid verticalAlign='middle'columns={4}>
+                        <Grid.Row >
                 {this.props.posts.map (post => 
-                <Post key={post.id} post={post} user={post.user} comments={post.comments} likes={post.likes} addLikes={this.props.addLikes} addToSaved={this.props.addToSaved}/>
+                <Grid.Column style={{border:'solid lightGrey 1px', display: 'flex',  justifyContent:'center', alignItems:'center'}}><Post key={post.id} post={post} user={post.user} comments={post.comments} likes={post.likes} addLikes={this.props.addLikes} addToSaved={this.props.addToSaved}/></Grid.Column>
                 )}
+            </Grid.Row>
+        </Grid>
             </div>
         )
     }
@@ -97,4 +103,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {addToSaved, addLikes, fetchPosts, userPosts, savedPosts, currentUser, logoutUser })(withRouter(PostContainer))
+export default connect(mapStateToProps, {addToSaved, addLikes, fetchPosts, userPosts, currentUser, logoutUser })(withRouter(PostContainer))

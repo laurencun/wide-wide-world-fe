@@ -2,7 +2,10 @@ import {Component} from 'react'
 import Comment from './Comment'
 import Like from './Like'
 import {connect} from 'react-redux'
+import {deletePost} from '../actions/post_actions'
 import {addComment} from '../actions/comment_actions'
+import {withRouter} from 'react-router-dom'
+import { Button, Label, Icon } from 'semantic-ui-react'
 
 
 class Post extends Component {
@@ -31,25 +34,30 @@ class Post extends Component {
 
     render(){
 
-        console.log(this.props.post, 'in post component')
 
     return (
-        <div>
-            <span style={{fontWeight:'bold'}}>{this.props.post.user.username}</span><br/>
-            <img width={500} src={this.props.post.image} alt={this.props.post.caption}/><br/>
-            <span>{this.props.post.caption}</span><br/>
-            <span style={{fontStyle:'italic'}}>{this.props.post.location}</span><br/>
-            <span> <Like likes={this.props.post.likes}/> </span>
-            <button onClick={() => this.props.addLikes(this.props.post, this.props.auth.user)}>like</button>
-            <button onClick={()=> this.props.addToSaved(this.props.post, this.props.auth.user)}>save</button>
-            <ul>
-                {this.props.post.comments.map((commentArray, index) => <Comment key={index} comments={commentArray} />)}
-            </ul>
-            <form onSubmit={this.addComment}>
-                <input onChange={this.handleChange} type='text' name='content' value={this.state.content} />    
-                <button type='submit'>comment</button>
-            </form>
-        </div>
+        <>
+    
+                <Label attached='left' style={{fontWeight:'bold'}}>{this.props.post.user.username}</Label>
+                {this.props.location.pathname === '/home' ?
+                <div >
+                    {/* add conditional rendering to liked and saved buttons to change when user has liked or saved post */}
+                <Button compact attached='right' onClick={() => this.props.addLikes(this.props.post, this.props.auth.user)}><Icon name='like'/></Button>
+                <Button compact attached="right" onClick={()=> this.props.addToSaved(this.props.post, this.props.auth.user)}><Icon name='bookmark outline'/></Button>
+                </div>
+                 :<Button compact onClick={() => this.props.deletePost(this.props.post.id)}>delete</Button>}
+                <img width={500} src={this.props.post.image} alt={this.props.post.caption}/><br/>
+                <span>{this.props.post.caption}</span>
+                <span style={{fontStyle:'italic'}}>{this.props.post.location}</span>
+                <span> <Like likes={this.props.post.likes}/> </span> <br/>
+                <form onSubmit={this.addComment}>
+                    <input style={{padding:'5px'}} onChange={this.handleChange} type='text' name='content' value={this.state.content} />    
+                    <Button compact type='submit'>comment</Button>
+                </form>
+                <ul>
+                    {this.props.post.comments.map((commentArray, index) => <Comment key={index} comments={commentArray} />)}
+                </ul>
+        </>
     )
 }
 
@@ -59,4 +67,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {addComment})(Post)
+export default connect(mapStateToProps, {addComment, deletePost})(withRouter(Post))

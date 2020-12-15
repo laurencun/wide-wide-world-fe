@@ -1,9 +1,13 @@
 const BASE_URL = 'http://localhost:3000'
 const POST_URL = `${BASE_URL}/posts`
+const USER_URL = `${BASE_URL}/users`
 const FETCH_POSTS = 'FETCH_POSTS'
 const NEW_POST_SUCCESS = 'NEW_POST_SUCCESS'
 const USER_POSTS = 'USER_POSTS'
-const SAVED_POSTS = 'SAVED_POSTS'
+// const SAVED_POSTS = 'SAVED_POSTS'
+const DELETE_POST = 'DELETE_POST'
+const SEARCH = 'SEARCH'
+
 
 export const fetchPosts = () => dispatch => {
     fetch(POST_URL)
@@ -48,14 +52,34 @@ export const userPosts = (userId) => dispatch => {
   )
 }
 
-export const savedPosts = (userId) => dispatch => {
-  // filter posts saved by current user
-  fetch(`http://localhost:3000/saveds`)
+export const deletePost = (postId) => dispatch => {
+
+  fetch(`${POST_URL}/${postId}`, {method: 'DELETE'})
   .then(res => res.json())
-  .then(saveds => 
+  .then(post => 
+      dispatch({
+      type: DELETE_POST,
+      post: post
+  })
+  )
+}
+
+export const searchPosts = (params) => dispatch => {
+  fetch(POST_URL)
+  .then(res => res.json())
+  .then(posts => 
     dispatch({
-      type: SAVED_POSTS,
-      saveds: saveds.filter(saved => saved.user_id === userId)
+      type: SEARCH,
+      posts: posts.filter(post => post.location.includes(params) || post.caption.includes(params))
     })
   )
 }
+
+// export const savedPosts = (userId) => {
+//   // filter posts saved by current user
+//   fetch(`${USER_URL}/${userId}`)
+//   .then(res => res.json())
+//   .then(userInfo => 
+//       console.log(userInfo.map(userInfo => userInfo.saveds))
+//       )
+// }
