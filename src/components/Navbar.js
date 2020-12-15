@@ -29,8 +29,6 @@ class Navbar extends Component {
 
     render() {
 
-        console.log(this.props.searchPosts)
-
         return (
             <Navigation >
                 <Menu >
@@ -42,7 +40,9 @@ class Navbar extends Component {
                     {this.props.location.pathname === '/home' ?
                         <Dropdown.Item onClick={this.props.showProfile}>My Profile</Dropdown.Item>
                         :<><Dropdown.Item onClick={this.props.showFeed}>Back to Feed</Dropdown.Item>
-                        <Dropdown.Item onClick={this.props.showSaved}>Show Saved</Dropdown.Item>
+                        {this.props.location.pathname === '/saved' ? 
+                        <Dropdown.Item onClick={this.props.showProfile}>My Posts</Dropdown.Item>
+                        :<Dropdown.Item onClick={this.props.showSaved}>Show Saved</Dropdown.Item>}
                         </>}
                         <Dropdown.Item onClick={this.props.showPostForm}>New Post</Dropdown.Item>
                         <Dropdown.Item onClick={this.props.logout}>Log Out</Dropdown.Item>

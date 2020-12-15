@@ -1,11 +1,22 @@
 const BASE_URL = 'http://localhost:3000'
 const LIKES_URL = `${BASE_URL}/likes`
 const ADD_LIKE = 'ADD_LIKE'
+const FETCH_LIKES = 'FETCH_LIKES'
+
+export const fetchLikes = (postId) => dispatch => {
+  fetch(LIKES_URL)
+  .then(res => res.json())
+  .then(likes => 
+    dispatch({
+    type: FETCH_LIKES,
+    likes: likes
+  })
+  )
+}
 
 
 export const addLikes = (post, user) =>  dispatch => {
-    // console.log(post, user)
-  
+
     const like = {
       user_id: user.id,
       post_id: post.id}
@@ -17,12 +28,13 @@ export const addLikes = (post, user) =>  dispatch => {
       }, 
       body: JSON.stringify(like)
       }
+
       fetch(LIKES_URL, reqObj)
       .then(res => res.json())
       .then(like => 
         dispatch({
         type: ADD_LIKE,
-        likes: post.likes.concat(like)
+        like: like
       })
       )
   }

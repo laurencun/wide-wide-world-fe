@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import Post from './Post'
 import Navbar from './Navbar'
 import NewPostForm from './NewPostForm'
-import {fetchPosts, userPosts} from '../actions/post_actions'
+import {fetchPosts, userPosts, savedPosts} from '../actions/post_actions'
 import {addLikes} from '../actions/like_actions'
 import {addToSaved} from '../actions/saved_actions'
 import {currentUser, logoutUser} from '../actions/auth'
 import {withRouter} from 'react-router-dom'
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 class PostContainer extends Component {
 
@@ -42,8 +42,8 @@ class PostContainer extends Component {
 
         if (window.location.href.split('/')[3] === 'profile') { 
             this.props.userPosts(this.props.auth.user.id)}
-        // else if (window.location.href.split('/')[3] === 'saved') {
-        //   this.props.savedPosts(this.props.auth.user.id)}
+        else if (window.location.href.split('/')[3] === 'saved') {
+          this.props.savedPosts(this.props.auth.user.id)}
         else {return null}
       }
 
@@ -77,22 +77,44 @@ class PostContainer extends Component {
         this.props.history.push('/saved')
     }
 
+    heading = () => {
+      if (window.location.href.split('/')[3] === 'profile') { 
+        return <h2>My Posts</h2>}
+      else if (window.location.href.split('/')[3] === 'saved') {
+        return <h2>Saved Posts</h2>}
+      else {return <span>“NOT ALL THOSE WHO WANDER ARE LOST” ~ J.R.R. TOLKIEN</span>}
+    }
+
     render() {
 
         return (
             <div>
-                <Navbar logout={this.logout} showPostForm={this.showPostForm} showProfile={this.showProfile} showSaved={this.showSaved} showFeed={this.showFeed}/>
+                <Navbar logout={this.logout} 
+                        showPostForm={this.showPostForm} 
+                        showProfile={this.showProfile} 
+                        showSaved={this.showSaved} 
+                        showFeed={this.showFeed}/>
+                
                 {this.state.showForm === true ? 
                 <NewPostForm />
                 : null}
-
-            <Grid verticalAlign='middle'columns={4}>
-                        <Grid.Row >
-                {this.props.posts.map (post => 
-                <Grid.Column style={{border:'solid lightGrey 1px', display: 'flex',  justifyContent:'center', alignItems:'center'}}><Post key={post.id} post={post} user={post.user} comments={post.comments} likes={post.likes} addLikes={this.props.addLikes} addToSaved={this.props.addToSaved}/></Grid.Column>
-                )}
-            </Grid.Row>
-        </Grid>
+                
+                <div style={{margin:'30px', textAlign:'center'}}>{this.heading()}</div>
+                
+                <Grid verticalAlign='middle'columns={4}>
+                  <Grid.Row >
+                    {this.props.posts.map (post =>
+                      <Grid.Column style={{border:'solid lightGrey 1px', display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                          <Post key={post.id} 
+                                post={post} 
+                                user={post.user} 
+                                comments={post.comments} 
+                                addLikes={this.props.addLikes} 
+                                addToSaved={this.props.addToSaved}/>
+                       </Grid.Column>
+                      )}
+                  </Grid.Row>
+                </Grid>
             </div>
         )
     }
@@ -103,4 +125,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {addToSaved, addLikes, fetchPosts, userPosts, currentUser, logoutUser })(withRouter(PostContainer))
+export default connect(mapStateToProps, {addToSaved, addLikes, fetchPosts, userPosts, currentUser, logoutUser, savedPosts})(withRouter(PostContainer))

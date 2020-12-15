@@ -4,7 +4,7 @@ const USER_URL = `${BASE_URL}/users`
 const FETCH_POSTS = 'FETCH_POSTS'
 const NEW_POST_SUCCESS = 'NEW_POST_SUCCESS'
 const USER_POSTS = 'USER_POSTS'
-// const SAVED_POSTS = 'SAVED_POSTS'
+const SAVED_POSTS = 'SAVED_POSTS'
 const DELETE_POST = 'DELETE_POST'
 const SEARCH = 'SEARCH'
 
@@ -75,11 +75,14 @@ export const searchPosts = (params) => dispatch => {
   )
 }
 
-// export const savedPosts = (userId) => {
-//   // filter posts saved by current user
-//   fetch(`${USER_URL}/${userId}`)
-//   .then(res => res.json())
-//   .then(userInfo => 
-//       console.log(userInfo.map(userInfo => userInfo.saveds))
-//       )
-// }
+export const savedPosts = (userId) => dispatch => {
+  // filter posts saved by current user
+  fetch(POST_URL)
+  .then(res => res.json())
+  .then(posts => 
+    dispatch({
+      type: SAVED_POSTS,
+      posts: posts.filter(post => post.saveds.some(saved => saved.user_id === userId))
+    })
+  )
+}

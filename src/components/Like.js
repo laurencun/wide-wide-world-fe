@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Like({likes}) {
+export default function Like ({likes}) {
 
     return (
         <div>
