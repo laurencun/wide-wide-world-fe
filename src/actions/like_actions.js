@@ -3,7 +3,7 @@ const LIKES_URL = `${BASE_URL}/likes`
 const ADD_LIKE = 'ADD_LIKE'
 const FETCH_LIKES = 'FETCH_LIKES'
 
-export const fetchLikes = (postId) => dispatch => {
+export const fetchLikes = () => dispatch => {
   fetch(LIKES_URL)
   .then(res => res.json())
   .then(likes => 

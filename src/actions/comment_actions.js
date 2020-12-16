@@ -1,7 +1,18 @@
 const BASE_URL = 'http://localhost:3000'
 const COMMENT_URL = `${BASE_URL}/comments`
 const ADD_COMMENT = 'ADD_COMMENT'
+const FETCH_COMMENTS = 'FETCH_COMMENTS'
 
+export const fetchComments = () => dispatch => {
+  fetch(COMMENT_URL)
+  .then(res => res.json())
+  .then(comments => 
+    dispatch({
+    type: FETCH_COMMENTS,
+    comments: comments
+  })
+  )
+}
 
 export const addComment = (comment) =>  dispatch => {
 

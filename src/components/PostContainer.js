@@ -3,17 +3,19 @@ import {connect} from 'react-redux'
 import Post from './Post'
 import Navbar from './Navbar'
 import NewPostForm from './NewPostForm'
+import EditPostForm from './EditPostForm'
 import {fetchPosts, userPosts, savedPosts} from '../actions/post_actions'
 import {addLikes} from '../actions/like_actions'
 import {addToSaved} from '../actions/saved_actions'
 import {currentUser, logoutUser} from '../actions/auth'
 import {withRouter} from 'react-router-dom'
-import { Grid } from 'semantic-ui-react'
+import {Grid} from 'semantic-ui-react'
 
 class PostContainer extends Component {
 
     state = {
-        showForm : false
+        showForm : false,
+        showEditForm : false
     }
 
     componentDidMount(){
@@ -36,15 +38,16 @@ class PostContainer extends Component {
           .then(data => {
             this.props.currentUser(data)
           })
+
+          if (window.location.href.split('/')[3] === 'profile') { 
+            this.props.userPosts()}
+          else if (window.location.href.split('/')[3] === 'saved') {
+            this.props.savedPosts()}
+          else
+            {this.props.fetchPosts()}
+          
         }
-
-        this.props.fetchPosts()
-
-        if (window.location.href.split('/')[3] === 'profile') { 
-            this.props.userPosts(this.props.auth.user.id)}
-        else if (window.location.href.split('/')[3] === 'saved') {
-          this.props.savedPosts(this.props.auth.user.id)}
-        else {return null}
+       
       }
 
       logout = () => {
@@ -61,6 +64,17 @@ class PostContainer extends Component {
       })
       : this.setState({
           showForm : false
+      })
+      }
+    }
+
+    showEditForm = () => {
+      { this.state.showEditForm === false ? 
+        this.setState({
+          showEditForm : true
+      })
+      : this.setState({
+          showEditForm : false
       })
       }
     }
@@ -90,13 +104,17 @@ class PostContainer extends Component {
         return (
             <div>
                 <Navbar logout={this.logout} 
-                        showPostForm={this.showPostForm} 
+                        showPostForm={this.showPostForm}  
                         showProfile={this.showProfile} 
                         showSaved={this.showSaved} 
                         showFeed={this.showFeed}/>
                 
                 {this.state.showForm === true ? 
                 <NewPostForm />
+                : null}
+
+                {this.state.showEditForm === true ? 
+                <EditPostForm />
                 : null}
                 
                 <div style={{margin:'30px', textAlign:'center'}}>{this.heading()}</div>
@@ -108,9 +126,9 @@ class PostContainer extends Component {
                           <Post key={post.id} 
                                 post={post} 
                                 user={post.user} 
-                                comments={post.comments} 
                                 addLikes={this.props.addLikes} 
-                                addToSaved={this.props.addToSaved}/>
+                                addToSaved={this.props.addToSaved}
+                                showEditForm={this.showEditForm}/>
                        </Grid.Column>
                       )}
                   </Grid.Row>

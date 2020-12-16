@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {Dropdown, Input, Menu} from 'semantic-ui-react'
+import {Dropdown, Input, Menu, Sticky} from 'semantic-ui-react'
 import {searchPosts} from '../actions/post_actions'
-import Navigation from "react-sticky-nav";
 
 
 class Navbar extends Component {
@@ -30,8 +29,11 @@ class Navbar extends Component {
     render() {
 
         return (
-            <Navigation >
-                <Menu >
+            <div ref={this.contextRef}>
+            <Sticky context={this.contextRef}>                
+                <Menu
+                attached='top'
+                style={{ backgroundColor: '#fff', paddingTop: '1em' }}>
                     <Menu.Item position="left" onClick={this.backHome}> <h2 style={{fontFamily: 'Fredericka the Great'}} >Wide Wide World</h2> </Menu.Item>
                     <Menu.Item position="right">
                         <Input onKeyDown={this.search} onChange={this.handleChange} name='search' placeholder='Search...' value={this.state.search}/>
@@ -48,7 +50,8 @@ class Navbar extends Component {
                         <Dropdown.Item onClick={this.props.logout}>Log Out</Dropdown.Item>
                     </Dropdown.Menu>
                 </Menu>
-            </Navigation>
+            </Sticky>
+            </div>
         )
     }
 }

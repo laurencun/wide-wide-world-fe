@@ -15,7 +15,17 @@ let updatedPosts
         case 'SAVED_POSTS':
             return action.posts
         case 'NEW_POST_SUCCESS':
-            return [...state, action.post]
+            return [...state, action.newPost]
+        case 'UPDATED_POST':
+            updatedPosts = state.map(post => {
+                if(post.id === action.updatedPost.id){
+                  return action.updatedPost
+                }
+                else{
+                  return post
+                }
+              })
+              return updatedPosts
         default:
              return state
     }
