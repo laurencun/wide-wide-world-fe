@@ -48,6 +48,32 @@ export const new_post_success = (post, user) => dispatch => {
       )
 }
 
+export const updatePost = (post, user) => (dispatch) => {
+
+  const reqObj = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: post.id,
+        image: post.image,
+        location: post.location,
+        caption: post.caption,
+        user: user
+      })
+    }
+
+    fetch(`${POST_URL}/${post.id}`, reqObj)
+    .then(resp => resp.json())
+    .then(updatedPost => 
+      dispatch({
+      type: UPDATED_POST,
+      updatedPost
+    })
+    )
+}
+
 export const userPosts = () => (dispatch, getState) => {
   //filter posts published by current user
   fetch(POST_URL)
@@ -93,29 +119,4 @@ export const savedPosts = () => (dispatch, getState) => {
       posts: posts.filter(post => post.saveds.some(saved => saved.user_id === getState().auth.user.id))
     })
   )
-}
-
-export const updatePost = (post) => (dispatch) => {
-
-    const reqObj = {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          id: post.id,
-          image: post.image, 
-          location: post.location,
-          caption: post.caption
-        })
-      }
-  
-      fetch(`${POST_URL}/${post.id}`, reqObj)
-      .then(resp => resp.json())
-      .then(updatedPost => 
-        dispatch({
-        type: UPDATED_POST,
-        updatedPost
-      })
-      )
 }

@@ -1,4 +1,4 @@
-export default function postToEditReducer(state= [], action) {
+export default function postToEditReducer(state= null, action) {
     
         switch (action.type) {
             case "POST_TO_EDIT":

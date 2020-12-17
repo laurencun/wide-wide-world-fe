@@ -36,12 +36,8 @@ class Post extends Component {
     }
 
     handleEdit = (post) => {
-        this.props.postToEdit(post)
-        this.showForm()
-    }
-
-    showForm = () => {
         this.props.showEditForm()
+        this.props.postToEdit(post)
     }
 
     componentDidMount () {
@@ -55,21 +51,22 @@ class Post extends Component {
 
     return (
         <>
-            <Label attached='left' style={{fontWeight:'bold'}}>{this.props.post.user.username}
 
-                {this.props.location.pathname === '/home' || this.props.location.pathname === '/saved' ?
+            {this.props.location.pathname === '/home' || this.props.location.pathname === '/saved' ?
             <div >
+                <Label attached='left' style={{fontWeight:'bold'}}>{this.props.post.user.username}
                 {/* add conditional rendering to liked and saved buttons to change when user has liked or saved post */}
-                <Button style={{float:'right'}} compact onClick={() => this.props.addLikes(this.props.post, this.props.auth.user)}><Icon name='like'/></Button>
-                <Button style={{float:'right'}} compact onClick={()=> this.props.addToSaved(this.props.post, this.props.auth.user)}><Icon name='bookmark outline'/></Button>
+                    <Button style={{float:'right'}} compact onClick={() => this.props.addLikes(this.props.post, this.props.auth.user)}><Icon name='like'/></Button>
+                    <Button style={{float:'right'}} compact onClick={()=> this.props.addToSaved(this.props.post, this.props.auth.user)}><Icon name='bookmark outline'/></Button>
+                </Label>
             </div>
+            
                  :
             <div>
                 <Button style={{float:'right'}} compact onClick={() => this.props.deletePost(this.props.post.id)}>delete</Button>
                 <Button style={{float:'right'}} compact onClick={() => this.handleEdit(this.props.post)}>edit</Button>
             </div> 
             }
-            </Label>
             
             <img width={500} src={this.props.post.image} alt={this.props.post.caption}/><br/>
             

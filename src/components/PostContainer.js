@@ -110,11 +110,11 @@ class PostContainer extends Component {
                         showFeed={this.showFeed}/>
                 
                 {this.state.showForm === true ? 
-                <NewPostForm />
+                <NewPostForm showPostForm={this.showPostForm}/>
                 : null}
 
                 {this.state.showEditForm === true ? 
-                <EditPostForm />
+                <EditPostForm showEditForm={this.showEditForm}/>
                 : null}
                 
                 <div style={{margin:'30px', textAlign:'center'}}>{this.heading()}</div>

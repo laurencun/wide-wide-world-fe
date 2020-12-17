@@ -27,6 +27,7 @@ class NewPostForm extends Component {
             location: '',
             caption: ''
         })
+        this.props.showPostForm()
     }
 
     render() {

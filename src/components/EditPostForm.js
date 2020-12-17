@@ -4,21 +4,23 @@ import {updatePost} from '../actions/post_actions'
 import {revert} from '../actions/post_to_edit.actions'
 
 class EditPostForm extends Component {
+ 
     constructor(props){
-        super(props)
+    super(props)
         this.state = {
-            id: this.props.post_to_edit.id,
-            image: this.props.post_to_edit.image, 
-            location: this.props.post_to_edit.location,
-            caption: this.props.post_to_edit.caption
+        id: '',
+        image: '',
+        location: '',
+        caption: ''
         }
     }
 
+
     componentDidUpdate(prevProps, prevState){
-        if (this.props.todoToEdit && prevState.image === '') {
+        if (this.props.post_to_edit && prevState.image === '') {
             this.setState({
                 id: this.props.post_to_edit.id,
-                image: this.props.post_to_edit.image, 
+                image: this.props.post_to_edit.image,
                 location: this.props.post_to_edit.location,
                 caption: this.props.post_to_edit.caption
             })
@@ -34,7 +36,7 @@ class EditPostForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        this.props.updatePost(this.state)
+        this.props.updatePost(this.state, this.props.auth.user)
         this.props.revert(this.state)
         this.setState({
             id: '',
@@ -42,12 +44,10 @@ class EditPostForm extends Component {
             location: '',
             caption: ''
         })
+        this.props.showEditForm()
     }
 
     render() {
-
-        console.log(this.props.post_to_edit)
-
         return (
             <div style={{margin: '10vh'}}>
                 <div style={{padding:50, align: 'center'}}>
@@ -65,9 +65,8 @@ class EditPostForm extends Component {
 }
 
 const mapStateToProps = state => ({
-    posts: state.posts,
-    auth: state.auth,
-    post_to_edit: state.post_to_edit
+  post_to_edit: state.post_to_edit,
+  auth: state.auth
 })
 
 export default connect(mapStateToProps, {updatePost, revert})(EditPostForm)
