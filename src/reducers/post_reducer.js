@@ -1,10 +1,11 @@
 export default function postReducer(state= [], action) {
  
 let updatedPosts
-
+let shuffledPosts
     switch (action.type) {
         case "FETCH_POSTS":
-          return action.posts
+            shuffledPosts = action.posts.sort( () => Math.random() - 0.5)
+          return shuffledPosts
         case 'USER_POSTS':
             return action.posts
         case 'DELETE_POST':
@@ -26,6 +27,8 @@ let updatedPosts
                 }
               })
               return updatedPosts
+        case 'FEATURED':
+            return action.posts
         default:
              return state
     }

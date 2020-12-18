@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {login_success} from '../actions/auth';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-
+import Featured from './Featured'
+import {Box} from 'rebass'
 
 class Login extends Component {
 
@@ -46,18 +47,26 @@ class Login extends Component {
     render() {
 
         return (
-            <div style={{margin: '10vh'}}>
-        {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
-            <div style={{padding:50, align: 'center'}}>
-                <h2>Welcome</h2>
-                <form onSubmit={this.login}>
-                    <input style={{padding:5}} onChange={this.handleChange} name='username' type='text' placeholder="Username" value={this.state.username}/><br/>
-                    <input style={{padding:5}} onChange={this.handleChange} name='password' type='text' placeholder="Password" value={this.state.password}/><br/>
-                    <input style={{margin:10}} type='submit' value='login' />
-                    <Link to="/signup">Create Account</Link>
-                </form>
-            </div>
-            </div>
+
+           <div style={{display:'flex', justifyContent:'center', margin:'20vh'}}>
+              <Box verticalAlign='center' style={{border:'solid lightGrey 1px', padding:'20px', margin:'20px'}}>
+                  {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
+                  <div style={{alignSelf:'center', marginTop:'200px'}}>
+                      <form onSubmit={this.login}>
+                      <h2>Welcome</h2><br/>
+                          <input style={{padding:5}} onChange={this.handleChange} name='username' type='text' placeholder="Username" value={this.state.username}/><br/><br/>
+                          <input style={{padding:5}} onChange={this.handleChange} name='password' type='text' placeholder="Password" value={this.state.password}/><br/><br/>
+                          <input style={{margin:10}} type='submit' value='login' />
+                          <Link to="/signup">Create Account</Link>
+                      </form>
+                  </div>
+                </Box>
+
+                <Box style={{border:'solid lightGrey 1px', padding:'20px', margin:'20px'}}>
+                <Featured/>
+               </Box>
+          </div>
+
         )
     }
 }

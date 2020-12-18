@@ -8,7 +8,6 @@ class EditPostForm extends Component {
     constructor(props){
     super(props)
         this.state = {
-        id: '',
         image: '',
         location: '',
         caption: ''
@@ -19,7 +18,6 @@ class EditPostForm extends Component {
     componentDidUpdate(prevProps, prevState){
         if (this.props.post_to_edit && prevState.image === '') {
             this.setState({
-                id: this.props.post_to_edit.id,
                 image: this.props.post_to_edit.image,
                 location: this.props.post_to_edit.location,
                 caption: this.props.post_to_edit.caption
@@ -29,8 +27,7 @@ class EditPostForm extends Component {
 
     handleChange = (event) => {
         this.setState({
-            id: this.props.post_to_edit.id,
-            [event.target.name] : event.target.value
+            [event.target.name] : event.target.value,
         })
     }
 
@@ -39,7 +36,6 @@ class EditPostForm extends Component {
         this.props.updatePost(this.state, this.props.auth.user)
         this.props.revert(this.state)
         this.setState({
-            id: '',
             image: '', 
             location: '',
             caption: ''

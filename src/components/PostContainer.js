@@ -9,7 +9,7 @@ import {addLikes} from '../actions/like_actions'
 import {addToSaved} from '../actions/saved_actions'
 import {currentUser, logoutUser} from '../actions/auth'
 import {withRouter} from 'react-router-dom'
-import {Grid} from 'semantic-ui-react'
+import {Flex, Box} from 'rebass'
 
 class PostContainer extends Component {
 
@@ -47,6 +47,7 @@ class PostContainer extends Component {
             {this.props.fetchPosts()}
           
         }
+      
        
       }
 
@@ -119,20 +120,21 @@ class PostContainer extends Component {
                 
                 <div style={{margin:'30px', textAlign:'center'}}>{this.heading()}</div>
                 
-                <Grid verticalAlign='middle'columns={4}>
-                  <Grid.Row >
+                <Flex flexWrap='wrap' mx={-2}>
+
                     {this.props.posts.map (post =>
-                      <Grid.Column style={{border:'solid lightGrey 1px', display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+                      <Box style={{border:'solid lightGrey 1px', display: 'flex',  justifyContent:'center', alignItems:'center', padding:'20px', margin:'20px'}}>
                           <Post key={post.id} 
                                 post={post} 
                                 user={post.user} 
                                 addLikes={this.props.addLikes} 
                                 addToSaved={this.props.addToSaved}
                                 showEditForm={this.showEditForm}/>
-                       </Grid.Column>
+                       </Box>
                       )}
-                  </Grid.Row>
-                </Grid>
+
+                  </Flex>
+
             </div>
         )
     }

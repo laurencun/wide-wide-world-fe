@@ -6,7 +6,7 @@ const REVERT = 'REVERT'
 export const postToEdit = (post) => dispatch => {
     fetch(`${POST_URL}/${post.id}`)
     .then(res => res.json())
-    .then(post => 
+    .then(post  => 
         dispatch({
         type: POST_TO_EDIT,
         post

@@ -7,6 +7,7 @@ const SAVED_POSTS = 'SAVED_POSTS'
 const DELETE_POST = 'DELETE_POST'
 const SEARCH = 'SEARCH'
 const UPDATED_POST = 'UPDATED_POST'
+const FEATURED = 'FEATURED'
 
 
 export const fetchPosts = () => dispatch => {
@@ -40,7 +41,7 @@ export const new_post_success = (post, user) => dispatch => {
   
       fetch(POST_URL, reqObj)
       .then(resp => resp.json())
-      .then(post => 
+      .then(newPost => 
         dispatch({
         type: NEW_POST_SUCCESS,
         newPost
@@ -48,7 +49,7 @@ export const new_post_success = (post, user) => dispatch => {
       )
 }
 
-export const updatePost = (post, user) => (dispatch) => {
+export const updatePost = (post, user) => (dispatch, getState) => {
 
   const reqObj = {
       method: 'PATCH',
@@ -56,7 +57,6 @@ export const updatePost = (post, user) => (dispatch) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: post.id,
         image: post.image,
         location: post.location,
         caption: post.caption,
@@ -64,7 +64,7 @@ export const updatePost = (post, user) => (dispatch) => {
       })
     }
 
-    fetch(`${POST_URL}/${post.id}`, reqObj)
+    fetch(`${POST_URL}/${getState().post_to_edit.id}`, reqObj)
     .then(resp => resp.json())
     .then(updatedPost => 
       dispatch({
@@ -104,7 +104,7 @@ export const searchPosts = (params) => dispatch => {
   .then(posts => 
     dispatch({
       type: SEARCH,
-      posts: posts.filter(post => post.location.includes(params) || post.caption.includes(params))
+      posts: posts.filter(post => post.location.toLowerCase().includes(params.toLowerCase()) || post.caption.toLowerCase().includes(params.toLowerCase()))
     })
   )
 }
@@ -118,5 +118,17 @@ export const savedPosts = () => (dispatch, getState) => {
       type: SAVED_POSTS,
       posts: posts.filter(post => post.saveds.some(saved => saved.user_id === getState().auth.user.id))
     })
+  )
+}
+
+export const featuredPosts = () => (dispatch) => {
+  //filter posts published by current user
+  fetch(POST_URL)
+  .then(res => res.json())
+  .then(posts => 
+      dispatch({
+      type: FEATURED,
+      posts: posts.filter(post => post.likes.length > 3)
+  })
   )
 }

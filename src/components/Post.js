@@ -9,6 +9,7 @@ import { Button, Label, Icon } from 'semantic-ui-react'
 import {fetchLikes} from '../actions/like_actions'
 import {fetchComments} from '../actions/comment_actions'
 import {postToEdit} from '../actions/post_to_edit.actions'
+import {Card, Text} from 'rebass'
 
 class Post extends Component {
 
@@ -51,26 +52,27 @@ class Post extends Component {
 
     return (
         <>
-
+        <Card>
+            {/* conditional rendering for post username and buttons for each post */}
             {this.props.location.pathname === '/home' || this.props.location.pathname === '/saved' ?
             <div >
-                <Label attached='left' style={{fontWeight:'bold'}}>{this.props.post.user.username}
+                <Text style={{fontWeight:'bold'}}>{this.props.post.user ? this.props.post.user.username : this.props.auth.user.username}
                 {/* add conditional rendering to liked and saved buttons to change when user has liked or saved post */}
                     <Button style={{float:'right'}} compact onClick={() => this.props.addLikes(this.props.post, this.props.auth.user)}><Icon name='like'/></Button>
                     <Button style={{float:'right'}} compact onClick={()=> this.props.addToSaved(this.props.post, this.props.auth.user)}><Icon name='bookmark outline'/></Button>
-                </Label>
+                </Text>
             </div>
             
                  :
             <div>
                 <Button style={{float:'right'}} compact onClick={() => this.props.deletePost(this.props.post.id)}>delete</Button>
-                <Button style={{float:'right'}} compact onClick={() => this.handleEdit(this.props.post)}>edit</Button>
+                <Button style={{float:'right'}} compact onClick={() => this.handleEdit(this.props.post, this.props.auth.user)}>edit</Button>
             </div> 
             }
             
             <img width={500} src={this.props.post.image} alt={this.props.post.caption}/><br/>
             
-            <span>{this.props.post.caption}</span>
+            <span>{this.props.post.caption}</span><br/>
             
             <span style={{fontStyle:'italic'}}>{this.props.post.location}</span>
             
@@ -78,16 +80,17 @@ class Post extends Component {
                     likes={this.props.likes.filter(like => like.post_id === this.props.post.id)}/> 
             </span> <br/>
             
-            <form onSubmit={this.addComment}>
+            <form style={{display:'flex', justifyContent:'center', alignItems:'center'}} onSubmit={this.addComment}>
                 <input style={{padding:'5px'}} onChange={this.handleChange} type='text' name='content' value={this.state.content} />    
                 <Button compact type='submit'>comment</Button>
             </form>
 
-            <ul>
+            <ul style={{justifyContent:'center'}}>
                <Comment key={this.props.post.id} 
                comments={this.props.comments.filter(comments => comments.post_id === this.props.post.id)} />
             </ul>
-        </>
+        </Card>
+    </>
     )
 }
 
