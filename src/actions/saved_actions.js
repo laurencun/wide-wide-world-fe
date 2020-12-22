@@ -3,11 +3,11 @@ const SAVED_URL = `${BASE_URL}/saveds`
 const ADD_TO_SAVED = 'ADD_TO_SAVED'
 
 
-export const addToSaved = (post, user) =>  dispatch => {
+export const addToSaved = (post) =>  dispatch => {
     // console.log(post, user)
   
     const saved = {
-      user_id: user.id,
+      user_id: post.user.id,
       post_id: post.id}
   
     const reqObj = {

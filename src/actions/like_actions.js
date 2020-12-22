@@ -15,17 +15,18 @@ export const fetchLikes = () => dispatch => {
 }
 
 
-export const addLikes = (post, user) =>  dispatch => {
+export const addLikes = (post) =>  dispatch => {
 
     const like = {
-      user_id: user.id,
-      post_id: post.id}
+      user_id: post.user.id,
+      post_id: post.id
+    }
   
     const reqObj = {
       method: 'POST',
-      headers: {
+      headers:{
         'content-type': 'application/json'
-      }, 
+      },
       body: JSON.stringify(like)
       }
 

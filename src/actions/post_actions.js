@@ -21,27 +21,21 @@ export const fetchPosts = () => dispatch => {
     )
 }
 
-export const new_post_success = (post, user) => dispatch => {
+export const new_post_success = (formObj) => dispatch => {
 
-  const newPost = {
-    user_id: post.user_id,
-    image: post.image, 
-    location: post.location,
-    caption: post.caption,
-    user: user
-  }
+  const data = new FormData()
+        Object.keys(formObj).forEach((key, value) => {
+        data.append(key, formObj[key])
+        })
 
     const reqObj = {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newPost)
+        body: data
       }
   
       fetch(POST_URL, reqObj)
-      .then(resp => resp.json())
-      .then(newPost => 
+      .then(res => res.json())
+      .then( newPost => 
         dispatch({
         type: NEW_POST_SUCCESS,
         newPost
@@ -49,23 +43,20 @@ export const new_post_success = (post, user) => dispatch => {
       )
 }
 
-export const updatePost = (post, user) => (dispatch, getState) => {
+export const updatePost = (formObj) => (dispatch, getState) => {
+
+  const data = new FormData()
+  Object.keys(formObj).forEach((key, value) => {
+    data.append(key, formObj[key])
+  })
 
   const reqObj = {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        image: post.image,
-        location: post.location,
-        caption: post.caption,
-        user: user
-      })
+      body: data
     }
 
     fetch(`${POST_URL}/${getState().post_to_edit.id}`, reqObj)
-    .then(resp => resp.json())
+    .then(resp => resp.json()) 
     .then(updatedPost => 
       dispatch({
       type: UPDATED_POST,
@@ -81,7 +72,7 @@ export const userPosts = () => (dispatch, getState) => {
   .then(posts => 
       dispatch({
       type: USER_POSTS,
-      posts: posts.filter(post => post.user_id === getState().auth.user.id)
+      posts: posts.filter(post => post.user.id === getState().auth.user.id)
   })
   )
 }

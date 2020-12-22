@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {deletePost} from '../actions/post_actions'
 import {addComment} from '../actions/comment_actions'
 import {withRouter} from 'react-router-dom'
-import { Button, Label, Icon } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import {fetchLikes} from '../actions/like_actions'
 import {fetchComments} from '../actions/comment_actions'
 import {postToEdit} from '../actions/post_to_edit.actions'
@@ -49,6 +49,8 @@ class Post extends Component {
 
 
     render(){
+        
+        const photo_url = `http://localhost:3000${this.props.post.image}`
 
     return (
         <>
@@ -58,8 +60,8 @@ class Post extends Component {
             <div >
                 <Text style={{fontWeight:'bold'}}>{this.props.post.user ? this.props.post.user.username : this.props.auth.user.username}
                 {/* add conditional rendering to liked and saved buttons to change when user has liked or saved post */}
-                    <Button style={{float:'right'}} compact onClick={() => this.props.addLikes(this.props.post, this.props.auth.user)}><Icon name='like'/></Button>
-                    <Button style={{float:'right'}} compact onClick={()=> this.props.addToSaved(this.props.post, this.props.auth.user)}><Icon name='bookmark outline'/></Button>
+                    <Button style={{float:'right'}} compact onClick={() => this.props.addLikes(this.props.post)}><Icon name='like'/></Button>
+                    <Button style={{float:'right'}} compact onClick={()=> this.props.addToSaved(this.props.post)}><Icon name='bookmark outline'/></Button>
                 </Text>
             </div>
             
@@ -70,7 +72,7 @@ class Post extends Component {
             </div> 
             }
             
-            <img width={500} src={this.props.post.image} alt={this.props.post.caption}/><br/>
+            <img width={500} src={photo_url} alt={this.props.post.caption}/><br/>
             
             <span>{this.props.post.caption}</span><br/>
             
