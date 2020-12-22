@@ -3,14 +3,9 @@ const POST_URL = `${BASE_URL}/posts`
 const POST_TO_EDIT = 'POST_TO_EDIT'
 const REVERT = 'REVERT'
 
-export const postToEdit = (formObj) => dispatch => {
+export const postToEdit = (post) => dispatch => {
 
-    const data = new FormData()
-    Object.keys(formObj).forEach((key, value) => {
-    data.append(key, formObj[key])
-    })
-
-    fetch(`${POST_URL}/${formObj.id}`)
+    fetch(`${POST_URL}/${post.id}`)
     .then(res => res.json())
     .then(post  => 
         dispatch({

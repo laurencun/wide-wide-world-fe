@@ -8,7 +8,6 @@ class EditPostForm extends Component {
     constructor(props){
     super(props)
         this.state = {
-        image: '',
         location: '',
         caption: ''
         }
@@ -16,9 +15,8 @@ class EditPostForm extends Component {
 
 
     componentDidUpdate(prevProps, prevState){
-        if (this.props.post_to_edit && prevState.image === '') {
+        if (this.props.post_to_edit && prevState.location === '') {
             this.setState({
-                image: this.props.post_to_edit.image,
                 location: this.props.post_to_edit.location,
                 caption: this.props.post_to_edit.caption
             })
@@ -51,7 +49,6 @@ class EditPostForm extends Component {
                 <div style={{padding:50, align: 'center'}}>
                     <h2>Edit Post</h2>
                     <form onSubmit={this.handleSubmit}>
-                    <input onChange={this.handleChange} type='file' name='image' accept="image/png, image/jpeg" /><br/>
                         <input style={{padding:5}} onChange={this.handleChange} name='location' type='text' placeholder="Location" value={this.state.location}/><br/>
                         <input style={{padding:5}} onChange={this.handleChange} name='caption' type='text' placeholder="Caption" value={this.state.caption}/><br/>
                         <input style={{margin:10}} type='submit' value='submit' />
