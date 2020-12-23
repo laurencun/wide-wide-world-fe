@@ -2,6 +2,9 @@
   "name": "wide-wide-world-fe",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "15.2.1"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
@@ -31,8 +34,8 @@
     "yup": "^0.32.8"
   },
   "scripts": {
-    "start": "node server/server.js",
-    "build": "react-scripts build",
+    "start": "node index.js",
+    "build": "webpack",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
