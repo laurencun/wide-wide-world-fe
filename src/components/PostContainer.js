@@ -31,7 +31,7 @@ class PostContainer extends Component {
             }
           }
     
-          fetch('http://localhost:3000/current_user', reqObj)
+          fetch('http://limitless-earth-02935.herokuapp.com/current_user', reqObj)
           .then(resp => resp.json())
           .then(data => {
             this.props.currentUser(data)

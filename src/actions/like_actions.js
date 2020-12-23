@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'http://limitless-earth-02935.herokuapp.com'
 const LIKES_URL = `${BASE_URL}/likes`
 const ADD_LIKE = 'ADD_LIKE'
 const FETCH_LIKES = 'FETCH_LIKES'

@@ -31,7 +31,7 @@ class Login extends Component {
             body: JSON.stringify(this.state)
           }
       
-          fetch('http://localhost:3000/auth', reqObj)
+          fetch('http://limitless-earth-02935.herokuapp.com/auth', reqObj)
           .then(resp => resp.json())
           .then(data => {
             if (data.error) {
@@ -58,7 +58,7 @@ class Login extends Component {
                       <form onSubmit={this.login}>
                       <h2>Share and Explore</h2><br/>
                           <input style={{padding:5}} onChange={this.handleChange} name='username' type='text' placeholder="Username" value={this.state.username}/><br/><br/>
-                          <input style={{padding:5}} onChange={this.handleChange} name='password' type='text' placeholder="Password" value={this.state.password}/><br/><br/>
+                          <input style={{padding:5}} onChange={this.handleChange} name='password' type='password' placeholder="Password" value={this.state.password}/><br/><br/>
                           <Button style={{padding:10, margin:10, color:'black'}} type='submit'>Enter</Button>
                           <Link to="/signup">Create Account</Link>
                       </form>

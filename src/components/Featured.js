@@ -14,7 +14,7 @@ class Featured extends Component {
 
             function Item (props)
                 {
-                    const photo_url = `http://localhost:3000${props.item.image}`
+                    const photo_url = `http://limitless-earth-02935.herokuapp.com${props.item.image}`
 
                     return (
         

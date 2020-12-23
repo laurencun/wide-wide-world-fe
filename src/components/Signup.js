@@ -30,7 +30,7 @@ class Signup extends Component {
             body: JSON.stringify(this.state)
           }
       
-          fetch('http://localhost:3000/users', reqObj)
+          fetch('http://limitless-earth-02935.herokuapp.com/users', reqObj)
           .then(resp => resp.json())
           .then(data => {
             if (data.error) {

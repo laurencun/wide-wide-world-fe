@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'http://limitless-earth-02935.herokuapp.com'
 const POST_URL = `${BASE_URL}/posts`
 const FETCH_POSTS = 'FETCH_POSTS'
 const NEW_POST_SUCCESS = 'NEW_POST_SUCCESS'
