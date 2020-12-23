@@ -54,7 +54,7 @@ class Login extends Component {
               
                   {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
                   <Flex flexWrap='wrap' justifyContent='center'>
-                  <Box  width={1} style={{backgroundColor:'white', display:'flex', justifyContent:'center', justifyItems:'center'}}>
+                  <Box  width={1} style={{border:'1px solid black', backgroundColor:'white', display:'flex', justifyContent:'center', justifyItems:'center'}}>
                       <form onSubmit={this.login}>
                       <h2>Share and Explore</h2><br/>
                           <input style={{padding:5}} onChange={this.handleChange} name='username' type='text' placeholder="Username" value={this.state.username}/><br/><br/>
