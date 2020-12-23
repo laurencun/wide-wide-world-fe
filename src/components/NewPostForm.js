@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {new_post_success} from '../actions/post_actions';
 import ImageUploader from "react-images-upload";
+import { Box, Button } from 'rebass'
 
 class NewPostForm extends Component {
 
@@ -44,9 +45,8 @@ class NewPostForm extends Component {
     render() {
 
         return (
-            <div style={{margin: '10vh'}}>
-                <div style={{padding:50, align: 'center'}}>
-                    <h2>New Post</h2>
+            <div>
+                <Box style={{border:'1px solid black', display:'flex', justifyContent:'center', justifyItems:'center'}}>
                     <form onSubmit={this.handleSubmit}>
                     <ImageUploader
                             withIcon={true}
@@ -55,13 +55,12 @@ class NewPostForm extends Component {
                             imgExtension={[".jpg", ".gif", ".png", ".gif", ".jpeg"]}
                             maxFileSize={5242880}
                         />
-                        {/* <input onChange={this.handleChange} type='file' name='image' accept="image/png, image/jpeg" />  */}
                         <input style={{padding:5}} onChange={this.handleChange} name='location' type='text' placeholder="Location" value={this.state.location}/><br/>
                         <input style={{padding:5}} onChange={this.handleChange} name='caption' type='text' placeholder="Caption" value={this.state.caption}/><br/>
-                        <input style={{margin:10}} type='submit' value='submit' />
+                        <Button style={{padding:10, margin:10, color:'black'}} type='submit'>Submit!</Button>
                     </form>
-                </div>
-                </div>
+                </Box>
+            </div>
         )
     }
 }

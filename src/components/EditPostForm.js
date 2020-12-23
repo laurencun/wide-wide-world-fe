@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {updatePost} from '../actions/post_actions'
 import {revert} from '../actions/post_to_edit.actions'
+import { Box, Button } from 'rebass'
 
 class EditPostForm extends Component {
  
@@ -45,15 +46,14 @@ class EditPostForm extends Component {
 
     render() {
         return (
-            <div style={{margin: '10vh'}}>
                 <div style={{padding:50, align: 'center'}}>
-                    <h2>Edit Post</h2>
+                    <Box style={{display:'flex', justifyContent:'center', justifyItems:'center'}}>
                     <form onSubmit={this.handleSubmit}>
-                        <input style={{padding:5}} onChange={this.handleChange} name='location' type='text' placeholder="Location" value={this.state.location}/><br/>
-                        <input style={{padding:5}} onChange={this.handleChange} name='caption' type='text' placeholder="Caption" value={this.state.caption}/><br/>
-                        <input style={{margin:10}} type='submit' value='submit' />
+                        Location: <input style={{padding:5}} onChange={this.handleChange} name='location' type='text' placeholder="Location" value={this.state.location}/><br/>
+                        Caption: <input style={{padding:5}} onChange={this.handleChange} name='caption' type='text' placeholder="Caption" value={this.state.caption}/><br/>
+                        <Button style={{padding:10, margin:10, color:'black'}} type='submit'>Save</Button>
                     </form>
-                </div>
+                    </Box>
                 </div>
         )
     }

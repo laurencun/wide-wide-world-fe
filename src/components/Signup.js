@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import {signup_success} from '../actions/auth';
 import { connect } from 'react-redux';
+import { Flex, Box } from 'reflexbox'
+import {Button} from 'rebass'
+import '../App.css'
 
 
 class Signup extends Component {
@@ -45,16 +48,23 @@ class Signup extends Component {
     render() {
 
         return (
-            <div style={{margin: '10vh'}}>
+        <div className='sign-up' style={{height:'100vh', width:'100vh'}}>
+
+        <div style={{display:'flex', justifyContent:'center', justifyItems:'center'}}>
         {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
-            <div style={{padding:50, align: 'center'}}>
-                <h2>Sign up and start sharing!</h2>
+        <Flex flexWrap='wrap'>
+            <Box style={{marginTop:'30vh', border:'1px solid black', backgroundColor:'white', display:'flex', justifyContent:'center', justifyItems:'center', padding:'20px'}}>
+            
                 <form onSubmit={this.signup}>
+                <h2>Adventure Awaits...</h2>
                     <input style={{padding:5}} onChange={this.handleChange} name='username' type='text' placeholder="Username" value={this.state.username}/><br/>
-                    <input style={{padding:5}} onChange={this.handleChange} name='password' type='text' placeholder="Password" value={this.state.password}/><br/>
-                    <input style={{margin:10}} type='submit' value='signup' />
+                    <input style={{padding:5}} onChange={this.handleChange} name='password' type='password' placeholder="Password" value={this.state.password}/><br/>
+                    <Button style={{padding:10, margin:10, color:'black'}} type='submit'>Sign Up</Button>
                 </form>
-            </div>
+            </Box>
+          </Flex>
+          </div>
+
             </div>
         )
     }

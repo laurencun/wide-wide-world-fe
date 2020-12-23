@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {Dropdown, Input, Menu, Sticky} from 'semantic-ui-react'
 import {searchPosts} from '../actions/post_actions'
 
-
 class Navbar extends Component {
 
     state = {
@@ -30,8 +29,8 @@ class Navbar extends Component {
 
         return (
             <div ref={this.contextRef}>
-            <Sticky context={this.contextRef}>                
-                <Menu
+            <Sticky context={this.contextRef}>                 
+                <Menu 
                 attached='top'
                 style={{ backgroundColor: '#fff', paddingTop: '1em' }}>
                     <Menu.Item position="left" onClick={this.backHome}> <h2 style={{fontFamily: 'Fredericka the Great'}} >Wide Wide World</h2> </Menu.Item>

@@ -9,12 +9,14 @@ import { Button, Icon } from 'semantic-ui-react'
 import {fetchLikes} from '../actions/like_actions'
 import {fetchComments} from '../actions/comment_actions'
 import {postToEdit} from '../actions/post_to_edit.actions'
-import {Card, Text} from 'rebass'
+import EditPostForm from './EditPostForm'
+import {Box, Text} from 'rebass'
 
 class Post extends Component {
 
     state = {
-        content: ''
+        content: '',
+        showEditForm : false
     }
 
     handleChange = event => {
@@ -37,9 +39,20 @@ class Post extends Component {
     }
 
     handleEdit = (post) => {
-        this.props.showEditForm()
+        this.showEditForm()
         this.props.postToEdit(post)
     }
+
+    showEditForm = () => {
+        { this.state.showEditForm === false ? 
+          this.setState({
+            showEditForm : true
+        })
+        : this.setState({
+            showEditForm : false
+        })
+        }
+      }
 
     componentDidMount () {
         this.props.fetchLikes()
@@ -54,7 +67,7 @@ class Post extends Component {
 
     return (
         <>
-        <Card>
+        <Box Reflex style={{border:'solid lightGrey 1px', padding:'20px', margin:'20px'}}>
             {/* conditional rendering for post username and buttons for each post */}
             {this.props.location.pathname === '/home' || this.props.location.pathname === '/saved' ?
             <div >
@@ -68,11 +81,15 @@ class Post extends Component {
                  :
             <div>
                 <Button style={{float:'right'}} compact onClick={() => this.props.deletePost(this.props.post.id)}>delete</Button>
-                <Button style={{float:'right'}} compact onClick={() => this.handleEdit(this.props.post, this.props.auth.user)}>edit</Button>
+                <Button style={{float:'right'}} compact onClick={() => this.handleEdit(this.props.post)}>edit</Button>
             </div> 
             }
             
-            <img width={500} src={photo_url} alt={this.props.post.caption}/><br/>
+            <img width={300} src={photo_url} alt={this.props.post.caption}/><br/> 
+
+            {this.state.showEditForm === true ? 
+                <EditPostForm showEditForm={this.showEditForm}/>
+                : null}
             
             <span>{this.props.post.caption}</span><br/>
             
@@ -80,18 +97,18 @@ class Post extends Component {
             
             <span> <Like key={this.props.post.id} 
                     likes={this.props.likes.filter(like => like.post_id === this.props.post.id)}/> 
-            </span> <br/>
+            </span>
             
-            <form style={{display:'flex', justifyContent:'center', alignItems:'center'}} onSubmit={this.addComment}>
+            <form style={{display:'flex', justifyContent:'center', alignItems:'center', padding:'15px'}} onSubmit={this.addComment}>
                 <input style={{padding:'5px'}} onChange={this.handleChange} type='text' name='content' value={this.state.content} />    
                 <Button compact type='submit'>comment</Button>
             </form>
 
-            <ul style={{justifyContent:'center'}}>
+            <div style={{justifyContent:'center', height: '110px', overflow: 'auto'}}>
                <Comment key={this.props.post.id} 
                comments={this.props.comments.filter(comments => comments.post_id === this.props.post.id)} />
-            </ul>
-        </Card>
+            </div>
+        </Box>
     </>
     )
 }

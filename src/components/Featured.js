@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import Carousel from 'react-material-ui-carousel'
-import {Paper} from '@material-ui/core'
+import {Card} from 'rebass'
 import {featuredPosts} from '../actions/post_actions'
 
 class Featured extends Component {
@@ -14,25 +14,29 @@ class Featured extends Component {
 
             function Item (props)
                 {
+                    const photo_url = `http://localhost:3000${props.item.image}`
+
                     return (
-                        <Paper style={{justifyContent:'center', alignItems:'center', padding:"20px"}}>
-                            <img width={500}height={600} src={props.item.image} alt={props.item.caption}/><br/>
+        
+                        <Card>
+                            <img width={500} src={photo_url} alt={props.item.caption}/><br/>
                             <h2>{props.item.location}</h2>
-                        </Paper>
+                        </Card>
+                    
                     )
                 }
 
         return (
-            <>
+            <div style={{display:'flex', justifyContent:'center', alignItems:'center', padding:"20px"}}>
              <Carousel >
             {
                 this.props.posts.map( (item, i) => <Item key={i} item={item} /> )
             }
             </Carousel>
-            </>
+            </div>
         )
     }
-}
+} 
 
 const mapStateToProps = state => ({
     posts: state.posts

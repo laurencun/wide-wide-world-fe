@@ -113,13 +113,13 @@ export const savedPosts = () => (dispatch, getState) => {
 }
 
 export const featuredPosts = () => (dispatch) => {
-  //filter posts published by current user
+  //sort most likes and limit 5
   fetch(POST_URL)
   .then(res => res.json())
   .then(posts => 
       dispatch({
       type: FEATURED,
-      posts: posts.filter(post => post.likes.length > 3)
+      posts: posts.sort(function(postA, postB) {return postA.likes - postB.likes}).slice(0, 5)
   })
   )
 }

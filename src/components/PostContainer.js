@@ -3,19 +3,17 @@ import {connect} from 'react-redux'
 import Post from './Post'
 import Navbar from './Navbar'
 import NewPostForm from './NewPostForm'
-import EditPostForm from './EditPostForm'
 import {fetchPosts, userPosts, savedPosts} from '../actions/post_actions'
 import {addLikes} from '../actions/like_actions'
 import {addToSaved} from '../actions/saved_actions'
 import {currentUser, logoutUser} from '../actions/auth'
 import {withRouter} from 'react-router-dom'
-import {Flex, Box} from 'rebass'
+import {Flex} from 'rebass'
 
 class PostContainer extends Component {
 
     state = {
-        showForm : false,
-        showEditForm : false
+        showForm : false
     }
 
     componentDidMount(){
@@ -69,17 +67,6 @@ class PostContainer extends Component {
       }
     }
 
-    showEditForm = () => {
-      { this.state.showEditForm === false ? 
-        this.setState({
-          showEditForm : true
-      })
-      : this.setState({
-          showEditForm : false
-      })
-      }
-    }
-
     showProfile = () => {
         this.props.history.push('/profile')
     }
@@ -103,6 +90,8 @@ class PostContainer extends Component {
     render() {
 
         return (
+          <>
+          
             <div>
                 <Navbar logout={this.logout} 
                         showPostForm={this.showPostForm}  
@@ -113,29 +102,20 @@ class PostContainer extends Component {
                 {this.state.showForm === true ? 
                 <NewPostForm showPostForm={this.showPostForm}/>
                 : null}
-
-                {this.state.showEditForm === true ? 
-                <EditPostForm showEditForm={this.showEditForm}/>
-                : null}
-                
+                </div>
+            
                 <div style={{margin:'30px', textAlign:'center'}}>{this.heading()}</div>
-                
-                <Flex flexWrap='wrap' mx={-2}>
 
+                <Flex flexWrap='wrap' justifyContent='center'>
                     {this.props.posts.map (post =>
-                      <Box style={{border:'solid lightGrey 1px', display: 'flex',  justifyContent:'center', alignItems:'center', padding:'20px', margin:'20px'}}>
-                          <Post key={post.id} 
+                          <Post key={post.id}  
                                 post={post} 
                                 user={post.user} 
                                 addLikes={this.props.addLikes} 
-                                addToSaved={this.props.addToSaved}
-                                showEditForm={this.showEditForm}/>
-                       </Box>
+                                addToSaved={this.props.addToSaved}/>
                       )}
-
-                  </Flex>
-
-            </div>
+              </Flex>
+              </>
         )
     }
 }

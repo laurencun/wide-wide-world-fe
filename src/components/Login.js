@@ -3,7 +3,9 @@ import {login_success} from '../actions/auth';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import Featured from './Featured'
-import {Box} from 'rebass'
+import { Button } from 'rebass'
+import { Flex, Box } from 'reflexbox'
+
 
 class Login extends Component {
 
@@ -48,23 +50,22 @@ class Login extends Component {
 
         return (
 
-           <div style={{display:'flex', justifyContent:'center', margin:'20vh'}}>
-              <Box verticalAlign='center' style={{border:'solid lightGrey 1px', padding:'20px', margin:'20px'}}>
+           <div style={{marginTop:'20vh', justifyContent:'center', justifyItems:'center'}}>
+              
                   {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
-                  <div style={{alignSelf:'center', marginTop:'200px'}}>
+                  <Flex flexWrap='wrap' justifyContent='center'>
+                  <Box  width={1} style={{backgroundColor:'white', display:'flex', justifyContent:'center', justifyItems:'center'}}>
                       <form onSubmit={this.login}>
-                      <h2>Welcome</h2><br/>
+                      <h2>Share and Explore</h2><br/>
                           <input style={{padding:5}} onChange={this.handleChange} name='username' type='text' placeholder="Username" value={this.state.username}/><br/><br/>
                           <input style={{padding:5}} onChange={this.handleChange} name='password' type='text' placeholder="Password" value={this.state.password}/><br/><br/>
-                          <input style={{margin:10}} type='submit' value='login' />
+                          <Button style={{padding:10, margin:10, color:'black'}} type='submit'>Enter</Button>
                           <Link to="/signup">Create Account</Link>
                       </form>
-                  </div>
-                </Box>
-
-                <Box style={{border:'solid lightGrey 1px', padding:'20px', margin:'20px'}}>
+                  </Box>
+                  
                 <Featured/>
-               </Box>
+                </Flex>                
           </div>
 
         )
