@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "15.2.1"
+    "node": "15"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
@@ -34,8 +34,8 @@
     "yup": "^0.32.8"
   },
   "scripts": {
-    "start": "node index.js",
-    "build": "webpack",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
