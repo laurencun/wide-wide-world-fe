@@ -63,7 +63,7 @@ class Post extends Component {
 
     render(){
         
-        const photo_url = `http://limitless-earth-02935.herokuapp.com${this.props.post.image}`
+        const photo_url = `https://limitless-earth-02935.herokuapp.com${this.props.post.image}`
 
     return (
         <>

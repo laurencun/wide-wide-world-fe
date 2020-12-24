@@ -1,4 +1,4 @@
-const BASE_URL = 'http://limitless-earth-02935.herokuapp.com'
+const BASE_URL = 'https://limitless-earth-02935.herokuapp.com'
 const SAVED_URL = `${BASE_URL}/saveds`
 const ADD_TO_SAVED = 'ADD_TO_SAVED'
 

@@ -31,7 +31,7 @@ class Login extends Component {
             body: JSON.stringify(this.state)
           }
       
-          fetch('http://limitless-earth-02935.herokuapp.com/auth', reqObj)
+          fetch('https://limitless-earth-02935.herokuapp.com/auth', reqObj)
           .then(resp => resp.json())
           .then(data => {
             if (data.error) {
