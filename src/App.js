@@ -8,7 +8,7 @@ import PostContainer from './components/PostContainer';
 import Profile from './components/Profile';
 import Saved from './components/Saved';
 import { connect } from 'react-redux'
-import '../App.css'
+import './App.css'
 
 
 class App extends Component {
