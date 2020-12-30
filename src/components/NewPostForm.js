@@ -18,45 +18,10 @@ class NewPostForm extends Component {
     this.onDrop = this.onDrop.bind(this)
     }
 
-    onDrop(pictureFiles) {
-        const file = pictureFiles[0]
-        if(file === null){
-            return alert(
-                'No file selected'
-            )
-        }
-        const xhr = newXMLHttpRequest()
-        xhr.open(`GET', '/sign-s3?file-name=${file.name}$file-type=${file.type}`)
-        xhr.onreadystatechange = () => {
-            if(xhr.readyState == 4){
-                if(xhr.state === 200){
-                    const response =JSON.parse(xhr.responseText)
-                    uploadFile(file, response.signedRequest, response.url)
-                }
-                else{
-                    alert('Could not get signed URL')
-                }
-            }
-        }
-        xhr.send()
-      }
-
-      uploadFile(file, signedRequest, url){
-        const xhr = new XMLHttpRequest();
-        xhr.open('PUT', signedRequest);
-        xhr.onreadystatechange = () => {
-          if(xhr.readyState === 4){
-            if(xhr.status === 200){
-                this.setState({
-                    image: url
-                  }); 
-            }
-            else{
-              alert('Could not upload file.');
-            }
-          }
-        };
-        xhr.send(file);
+    onDrop(pictureFiles, pictureDataURLs) {
+        this.setState({
+          image: pictureFiles[0]
+        }); 
       }
     
 
