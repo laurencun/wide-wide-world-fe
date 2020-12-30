@@ -11,17 +11,52 @@ class NewPostForm extends Component {
     this.state = {
         user: this.props.auth.user,
         user_id: this.props.auth.user.id,
-        image: '', 
+        image: '',
         location: '',
         caption: ''
     }
     this.onDrop = this.onDrop.bind(this)
     }
 
-    onDrop(pictureFiles, pictureDataURLs) {
-        this.setState({
-          image: pictureFiles[0]
-        }); 
+    onDrop(pictureFiles) {
+        const file = pictureFiles[0]
+        if(file === null){
+            return alert(
+                'No file selected'
+            )
+        }
+        const xhr = newXMLHttpRequest()
+        xhr.open(`GET', '/sign-s3?file-name=${file.name}$file-type=${file.type}`)
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState == 4){
+                if(xhr.state === 200){
+                    const response =JSON.parse(xhr.responseText)
+                    uploadFile(file, response.signedRequest, response.url)
+                }
+                else{
+                    alert('Could not get signed URL')
+                }
+            }
+        }
+        xhr.send()
+      }
+
+      uploadFile(file, signedRequest, url){
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', signedRequest);
+        xhr.onreadystatechange = () => {
+          if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                this.setState({
+                    image: url
+                  }); 
+            }
+            else{
+              alert('Could not upload file.');
+            }
+          }
+        };
+        xhr.send(file);
       }
     
 
@@ -35,7 +70,7 @@ class NewPostForm extends Component {
         event.preventDefault()
         this.props.new_post_success(this.state)
         this.setState({
-            image: '', 
+            image: '',
             location: '',
             caption: ''
         })
@@ -46,6 +81,7 @@ class NewPostForm extends Component {
 
         return (
             <div>
+                {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
                 <Box style={{border:'1px solid black', display:'flex', justifyContent:'center', justifyItems:'center'}}>
                     <form onSubmit={this.handleSubmit}>
                     <ImageUploader
