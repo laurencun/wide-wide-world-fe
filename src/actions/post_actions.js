@@ -11,7 +11,7 @@ const FEATURED = 'FEATURED'
 
 
 export const fetchPosts = () => dispatch => {
-    fetch(POST_URL)
+    fetch(POST_URL,  {mode: "no-cors"})
     .then(res => res.json())
     .then(posts => 
         dispatch({
