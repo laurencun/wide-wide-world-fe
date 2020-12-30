@@ -1,4 +1,4 @@
-const BASE_URL = 'https://wwworldproject.s3.us-east-2.amazonaws.com'
+const BASE_URL = 'https://limitless-earth-02935.herokuapp.com'
 const POST_URL = `${BASE_URL}/posts`
 const FETCH_POSTS = 'FETCH_POSTS'
 const NEW_POST_SUCCESS = 'NEW_POST_SUCCESS'
@@ -22,8 +22,6 @@ export const fetchPosts = () => dispatch => {
 }
 
 export const new_post_success = (formObj) => dispatch => {
-
-console.log(formObj)
 
   const data = new FormData()
         Object.keys(formObj).forEach((key, value) => {
@@ -121,7 +119,7 @@ export const featuredPosts = () => (dispatch) => {
   .then(posts => 
       dispatch({
       type: FEATURED,
-      posts: posts.sort(function(postA, postB) {return postA.likes - postB.likes}).slice(0, 4)
+      posts: posts.sort(function(postA, postB) {return postA.likes - postB.likes}).slice(0, )
   })
   )
 }
