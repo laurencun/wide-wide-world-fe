@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import Carousel from 'react-material-ui-carousel'
 import {Card} from 'rebass'
 import {featuredPosts} from '../actions/post_actions'
+import API from '../API.js'
+
 
 class Featured extends Component {
 
@@ -14,7 +16,7 @@ class Featured extends Component {
 
             function Item (props)
                 {
-                    const photo_url = `https://limitless-earth-02935.herokuapp.com${props.item.image}`
+                    const photo_url = `${API}${props.item.image}`
 
                     return (
         

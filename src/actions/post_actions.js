@@ -1,4 +1,6 @@
-const BASE_URL = 'https://limitless-earth-02935.herokuapp.com'
+import API from '../API.js'
+
+const BASE_URL = `${API}`
 const POST_URL = `${BASE_URL}/posts`
 const FETCH_POSTS = 'FETCH_POSTS'
 const NEW_POST_SUCCESS = 'NEW_POST_SUCCESS'
@@ -11,7 +13,7 @@ const FEATURED = 'FEATURED'
 
 
 export const fetchPosts = () => dispatch => {
-    fetch(POST_URL,  {mode: "no-cors"})
+    fetch(POST_URL)
     .then(res => res.json())
     .then(posts => 
         dispatch({
@@ -119,7 +121,7 @@ export const featuredPosts = () => (dispatch) => {
   .then(posts => 
       dispatch({
       type: FEATURED,
-      posts: posts.sort(function(postA, postB) {return postA.likes - postB.likes}).slice(0, )
+      posts: posts.sort(function(postA, postB) {return postA.likes - postB.likes}).slice(0, 5)
   })
   )
 }

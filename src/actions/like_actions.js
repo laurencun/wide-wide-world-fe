@@ -1,4 +1,6 @@
-const BASE_URL = 'https://limitless-earth-02935.herokuapp.com'
+import API from '../API.js'
+
+const BASE_URL = `${API}`
 const LIKES_URL = `${BASE_URL}/likes`
 const ADD_LIKE = 'ADD_LIKE'
 const FETCH_LIKES = 'FETCH_LIKES'

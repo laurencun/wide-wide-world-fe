@@ -9,6 +9,7 @@ import {addToSaved} from '../actions/saved_actions'
 import {currentUser, logoutUser} from '../actions/auth'
 import {withRouter} from 'react-router-dom'
 import {Flex} from 'rebass'
+import API from '../API.js'
 
 class PostContainer extends Component {
 
@@ -31,7 +32,7 @@ class PostContainer extends Component {
             }
           }
     
-          fetch('https://limitless-earth-02935.herokuapp.com/current_user', reqObj)
+          fetch(`${API}/current_user`, reqObj)
           .then(resp => resp.json())
           .then(data => {
             this.props.currentUser(data)

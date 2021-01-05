@@ -1,4 +1,6 @@
-const BASE_URL = 'https://limitless-earth-02935.herokuapp.com'
+import API from '../API.js'
+
+const BASE_URL = `${API}`
 const SAVED_URL = `${BASE_URL}/saveds`
 const ADD_TO_SAVED = 'ADD_TO_SAVED'
 

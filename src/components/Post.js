@@ -11,6 +11,7 @@ import {fetchComments} from '../actions/comment_actions'
 import {postToEdit} from '../actions/post_to_edit.actions'
 import EditPostForm from './EditPostForm'
 import {Box, Text} from 'rebass'
+import API from '../API.js'
 
 class Post extends Component {
 
@@ -63,7 +64,7 @@ class Post extends Component {
 
     render(){
         
-        const photo_url = `https://limitless-earth-02935.herokuapp.com${this.props.post.image}`
+        const photo_url = `${API}${this.props.post.image}`
 
     return (
         <>

@@ -1,4 +1,6 @@
-const BASE_URL = 'https://limitless-earth-02935.herokuapp.com'
+import API from '../API.js'
+
+const BASE_URL = `${API}`
 const POST_URL = `${BASE_URL}/posts`
 const POST_TO_EDIT = 'POST_TO_EDIT'
 const REVERT = 'REVERT'
