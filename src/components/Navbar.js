@@ -32,8 +32,8 @@ class Navbar extends Component {
             <Sticky context={this.contextRef}>                 
                 <Menu 
                 attached='top'
-                style={{ backgroundColor: '#fff', paddingTop: '1em' }}>
-                    <Menu.Item position="left" onClick={this.backHome}> <h2 style={{fontFamily: 'Fredericka the Great'}} >Wide Wide World</h2> </Menu.Item>
+                style={{ backgroundColor:'#ffbb33', paddingTop: '1em', fontFamily:'Playfair'}}>
+                    <Menu.Item position="left" onClick={this.backHome}> <h2 style={{fontFamily: 'Major Mono Display, monospace'}}>Wide Wide World</h2> </Menu.Item>
                     <Menu.Item position="right">
                         <Input onKeyDown={this.search} onChange={this.handleChange} name='search' placeholder='Search...' value={this.state.search}/>
                     </Menu.Item>

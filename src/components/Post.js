@@ -94,7 +94,7 @@ class Post extends Component {
             
             <span>{this.props.post.caption}</span><br/>
             
-            <span style={{fontStyle:'italic'}}>{this.props.post.location}</span>
+            <span style={{fontFamily:'Playfair'}}>{this.props.post.location}</span>
             
             <span> <Like key={this.props.post.id} 
                     likes={this.props.likes.filter(like => like.post_id === this.props.post.id)}/> 

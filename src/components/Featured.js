@@ -22,7 +22,7 @@ class Featured extends Component {
         
                         <Card>
                             <img width={500} src={photo_url} alt={props.item.caption}/><br/>
-                            <h2>{props.item.location}</h2>
+                            <h2 style={{fontFamily:'Playfair'}}>{props.item.location}</h2>
                         </Card>
                     
                     )

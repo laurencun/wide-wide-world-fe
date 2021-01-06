@@ -82,9 +82,9 @@ class PostContainer extends Component {
 
     heading = () => {
       if (window.location.href.split('/')[3] === 'profile') { 
-        return <h2>My Posts</h2>}
+        return <h2 style={{fontFamily: 'Playfair'}}>Your Posts</h2>}
       else if (window.location.href.split('/')[3] === 'saved') {
-        return <h2>Saved Posts</h2>}
+        return <h2 style={{fontFamily: 'Playfair'}}>Saved Posts</h2>}
       else {return <span>“NOT ALL THOSE WHO WANDER ARE LOST” ~ J.R.R. TOLKIEN</span>}
     }
 

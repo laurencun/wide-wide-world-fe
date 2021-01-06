@@ -51,17 +51,17 @@ class Login extends Component {
         return (
 
            <div style={{justifyContent:'center', justifyItems:'center'}}>
-              <h1 style={{fontFamily: 'Fredericka the Great'}} >Wide Wide World</h1> 
+              <h1 style={{fontFamily: 'Major Mono Display, monospace'}} >Wide Wide World</h1> 
               
                   {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
                   <Flex flexWrap='wrap' justifyContent='center'>
-                  <Box  width={1} style={{border:'1px solid black', backgroundColor:'white', display:'flex', justifyContent:'center', justifyItems:'center'}}>
+                  <Box  width={1} style={{border:'1px solid black', backgroundColor:'#ffbb33', display:'flex', justifyContent:'center', justifyItems:'center'}}>
                       <form onSubmit={this.login}>
-                      <h2 style={{textAlign: 'center'}}>Share and Explore</h2><br/>
+                      <h2 style={{justifyContent: 'center', fontFamily:'Playfair'}}>Share and Explore</h2><br/>
                           <input style={{padding:5}} onChange={this.handleChange} name='username' type='text' placeholder="Username" value={this.state.username}/><br/><br/>
                           <input style={{padding:5}} onChange={this.handleChange} name='password' type='password' placeholder="Password" value={this.state.password}/><br/><br/>
                           <Button style={{padding:10, margin:10, color:'black'}} type='submit'>Enter</Button>
-                          <Link to="/signup">Create Account</Link>
+                          <Link to="/signup" style={{fontFamily: 'Playfair', textDecoration: 'underline', color:'black'}}>Create Account</Link>
                       </form>
                   </Box>
                   
