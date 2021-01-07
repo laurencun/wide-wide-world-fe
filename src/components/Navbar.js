@@ -39,7 +39,7 @@ class Navbar extends Component {
                     </Menu.Item>
                     <Dropdown.Menu>
                     {this.props.location.pathname === '/home' ?
-                        <Dropdown.Item onClick={this.props.showProfile}>My Profile</Dropdown.Item>
+                        <Dropdown.Item onClick={this.props.showProfile}>My Posts</Dropdown.Item>
                         :<><Dropdown.Item onClick={this.props.showFeed}>Back to Feed</Dropdown.Item>
                         {this.props.location.pathname === '/saved' ? 
                         <Dropdown.Item onClick={this.props.showProfile}>My Posts</Dropdown.Item>
