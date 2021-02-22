@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/wwworld/static/css/main.57d5a3a9.chunk.css",
+    "main.js": "/wwworld/static/js/main.c514fbbc.chunk.js",
+    "main.js.map": "/wwworld/static/js/main.c514fbbc.chunk.js.map",
+    "runtime-main.js": "/wwworld/static/js/runtime-main.3ab7319f.js",
+    "runtime-main.js.map": "/wwworld/static/js/runtime-main.3ab7319f.js.map",
+    "static/css/2.a69ecd67.chunk.css": "/wwworld/static/css/2.a69ecd67.chunk.css",
+    "static/js/2.6cc99d95.chunk.js": "/wwworld/static/js/2.6cc99d95.chunk.js",
+    "static/js/2.6cc99d95.chunk.js.map": "/wwworld/static/js/2.6cc99d95.chunk.js.map",
+    "index.html": "/wwworld/index.html",
+    "static/css/2.a69ecd67.chunk.css.map": "/wwworld/static/css/2.a69ecd67.chunk.css.map",
+    "static/css/main.57d5a3a9.chunk.css.map": "/wwworld/static/css/main.57d5a3a9.chunk.css.map",
+    "static/js/2.6cc99d95.chunk.js.LICENSE.txt": "/wwworld/static/js/2.6cc99d95.chunk.js.LICENSE.txt",
+    "static/media/UploadIcon.svg": "/wwworld/static/media/UploadIcon.469126df.svg",
+    "static/media/semantic.min.css": "/wwworld/static/media/outline-icons.ddae9b1b.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3ab7319f.js",
+    "static/css/2.a69ecd67.chunk.css",
+    "static/js/2.6cc99d95.chunk.js",
+    "static/css/main.57d5a3a9.chunk.css",
+    "static/js/main.c514fbbc.chunk.js"
+  ]
+}
