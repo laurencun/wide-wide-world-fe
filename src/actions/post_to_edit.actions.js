@@ -1,9 +1,6 @@
 import API from '../API.js'
 
-const BASE_URL = `${API}`
-const POST_URL = `${BASE_URL}/posts`
-const POST_TO_EDIT = 'POST_TO_EDIT'
-const REVERT = 'REVERT'
+const POST_URL = `${API}/posts`
 
 export const postToEdit = (post) => dispatch => {
 
@@ -11,12 +8,12 @@ export const postToEdit = (post) => dispatch => {
     .then(res => res.json())
     .then(post  => 
         dispatch({
-        type: POST_TO_EDIT,
+        type: 'POST_TO_EDIT',
         post
     })
     )
 }
 
 export const revert = (post) => {
-    return {type: REVERT, post}
+    return {type: 'REVERT', post}
 }

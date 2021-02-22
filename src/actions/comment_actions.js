@@ -1,16 +1,13 @@
 import API from '../API.js'
 
-const BASE_URL = `${API}`
-const COMMENT_URL = `${BASE_URL}/comments`
-const ADD_COMMENT = 'ADD_COMMENT'
-const FETCH_COMMENTS = 'FETCH_COMMENTS'
+const COMMENT_URL = `${API}/comments`
 
 export const fetchComments = () => dispatch => {
   fetch(COMMENT_URL)
   .then(res => res.json())
   .then(comments => 
     dispatch({
-    type: FETCH_COMMENTS,
+    type: 'FETCH_COMMENTS',
     comments: comments
   })
   )
@@ -29,7 +26,7 @@ export const addComment = (comment) =>  dispatch => {
       .then(res => res.json())
       .then(comment => 
         dispatch({
-        type: ADD_COMMENT,
+        type: 'ADD_COMMENT',
         comment
       })
       )

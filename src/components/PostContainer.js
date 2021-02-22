@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+
 import Post from './Post'
 import Navbar from './Navbar'
 import NewPostForm from './NewPostForm'
+import API from '../API.js'
+import '../App.css'
+
+
 import {fetchPosts, userPosts, savedPosts} from '../actions/post_actions'
 import {addLikes} from '../actions/like_actions'
 import {addToSaved} from '../actions/saved_actions'
 import {currentUser, logoutUser} from '../actions/auth'
+import {findUser} from '../actions/user_actions'
 import {withRouter} from 'react-router-dom'
 import {Flex} from 'rebass'
-import API from '../API.js'
 
 class PostContainer extends Component {
 
@@ -21,10 +26,11 @@ class PostContainer extends Component {
 
         const token = localStorage.getItem('my_app_token')
     
+        //if no JWT redirected back to login page
         if (!token) {
           this.props.history.push('/')
         } else {
-    
+        //retrieve the token and current user information
           const reqObj = {
             method: 'GET',
             headers: {
@@ -38,12 +44,14 @@ class PostContainer extends Component {
             this.props.currentUser(data)
           })
 
+          //make fetch request based on window location
           if (window.location.href.split('/')[3] === 'profile') { 
             this.props.userPosts()}
           else if (window.location.href.split('/')[3] === 'saved') {
             this.props.savedPosts()}
           else
-            {this.props.fetchPosts()}
+            {this.props.fetchPosts()
+              this.props.findUser()}
           
         }
       
@@ -53,11 +61,13 @@ class PostContainer extends Component {
       logout = () => {
         localStorage.removeItem('my_app_token')
         this.props.logoutUser()
+        //redirect to login page after toekn removed
         this.props.history.push('/')
     }
 
 
     showPostForm = () => {
+      //toggle showing new post form on click
       { this.state.showForm === false ? 
         this.setState({
           showForm : true
@@ -81,6 +91,7 @@ class PostContainer extends Component {
     }
 
     heading = () => {
+      //conditional rendering for heading
       if (window.location.href.split('/')[3] === 'home') { 
       return <span>“NOT ALL THOSE WHO WANDER ARE LOST” ~ J.R.R. TOLKIEN</span>}
     }
@@ -98,13 +109,14 @@ class PostContainer extends Component {
                         showFeed={this.showFeed}/>
                 
                 {this.state.showForm === true ? 
+                //render new post form if 'new post' has been clicked
                 <NewPostForm showPostForm={this.showPostForm}/>
                 : null}
                 </div>
             
                 <div style={{margin:'30px', textAlign:'center'}}>{this.heading()}</div>
 
-                <Flex flexWrap='wrap' justifyContent='center'>
+                <div className='masonry' justifyContent='center' justifyItems='center'>
                     {this.props.posts.map (post =>
                           <Post key={post.id}  
                                 post={post} 
@@ -112,7 +124,7 @@ class PostContainer extends Component {
                                 addLikes={this.props.addLikes} 
                                 addToSaved={this.props.addToSaved}/>
                       )}
-              </Flex>
+              </div>
               </>
         )
     }
@@ -123,4 +135,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {addToSaved, addLikes, fetchPosts, userPosts, currentUser, logoutUser, savedPosts})(withRouter(PostContainer))
+export default connect(mapStateToProps, {addToSaved, addLikes, fetchPosts, userPosts, currentUser, logoutUser, savedPosts, findUser})(withRouter(PostContainer))

@@ -33,12 +33,14 @@ class NewPostForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
+        //pass state to post action to create new post
         this.props.new_post_success(this.state)
         this.setState({
             image: '',
             location: '',
             caption: ''
         })
+        //toggle showing form
         this.props.showPostForm()
     }
 

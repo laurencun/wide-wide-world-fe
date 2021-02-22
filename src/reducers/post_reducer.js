@@ -18,7 +18,6 @@ let shuffledPosts
         case 'NEW_POST_SUCCESS':
             return [...state, action.newPost]
         case 'UPDATED_POST':
-            console.log(action.updatedPost)
             updatedPosts = state.map(post => {
                 if(post.id === action.updatedPost.id){
                   return action.updatedPost

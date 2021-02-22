@@ -1,16 +1,13 @@
 import API from '../API.js'
 
-const BASE_URL = `${API}`
-const LIKES_URL = `${BASE_URL}/likes`
-const ADD_LIKE = 'ADD_LIKE'
-const FETCH_LIKES = 'FETCH_LIKES'
+const LIKES_URL = `${API}/likes`
 
 export const fetchLikes = () => dispatch => {
   fetch(LIKES_URL)
   .then(res => res.json())
   .then(likes => 
     dispatch({
-    type: FETCH_LIKES,
+    type: 'FETCH_LIKES',
     likes: likes
   })
   )
@@ -36,7 +33,7 @@ export const addLikes = (post) =>  dispatch => {
       .then(res => res.json())
       .then(like => 
         dispatch({
-        type: ADD_LIKE,
+        type: 'ADD_LIKE',
         like: like
       })
       )

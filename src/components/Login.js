@@ -39,8 +39,11 @@ class Login extends Component {
                 error: data.error
               })
             } else {
+              //pass the user credentials to post action
               this.props.login_success(data)
+              // set the local storage to contain JWT
               localStorage.setItem('my_app_token', data.token)
+              // redirect user to home page after login
               this.props.history.push('/home')
             }
           })
@@ -54,18 +57,26 @@ class Login extends Component {
               <h1 style={{fontFamily: 'Major Mono Display, monospace'}} >Wide Wide World</h1> 
               
                   {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
+                  
                   <Flex flexWrap='wrap' justifyContent='center'>
+                  
                   <Box  width={1} style={{border:'1px solid black', backgroundColor:'#ffbb33', display:'flex', justifyContent:'center', justifyItems:'center'}}>
                       <form onSubmit={this.login}>
-                      <h2 style={{justifyContent: 'center', fontFamily:'Playfair'}}>Share and Explore</h2><br/>
+                      
+                        <h2 style={{justifyContent: 'center', fontFamily:'Playfair'}}>Share and Explore</h2><br/>
+                          
                           <input style={{padding:5}} onChange={this.handleChange} name='username' type='text' placeholder="Username" value={this.state.username}/><br/><br/>
                           <input style={{padding:5}} onChange={this.handleChange} name='password' type='password' placeholder="Password" value={this.state.password}/><br/><br/>
+                          
                           <Button style={{padding:10, margin:10, color:'black'}} type='submit'>Enter</Button>
+
                           <Link to="/signup" style={{fontFamily: 'Playfair', textDecoration: 'underline', color:'black'}}>Create Account</Link>
+                      
                       </form>
                   </Box>
                   
-                <Featured/>
+                  <Featured/>
+                
                 </Flex>                
           </div>
 

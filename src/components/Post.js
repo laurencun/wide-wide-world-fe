@@ -1,17 +1,21 @@
 import {Component} from 'react'
 import Comment from './Comment'
 import Like from './Like'
+import EditPostForm from './EditPostForm'
+import API from '../API.js'
+import '../App.css'
+
 import {connect} from 'react-redux'
 import {deletePost} from '../actions/post_actions'
 import {addComment} from '../actions/comment_actions'
 import {withRouter} from 'react-router-dom'
-import { Button, Icon } from 'semantic-ui-react'
 import {fetchLikes} from '../actions/like_actions'
 import {fetchComments} from '../actions/comment_actions'
 import {postToEdit} from '../actions/post_to_edit.actions'
-import EditPostForm from './EditPostForm'
+
+import { Button, Icon } from 'semantic-ui-react'
 import {Box, Text} from 'rebass'
-import API from '../API.js'
+
 
 class Post extends Component {
 
@@ -45,6 +49,7 @@ class Post extends Component {
     }
 
     showEditForm = () => {
+        //toggle display edit form on click
         { this.state.showEditForm === false ? 
           this.setState({
             showEditForm : true
@@ -56,25 +61,31 @@ class Post extends Component {
       }
 
     componentDidMount () {
+        //get all likes and comments by individual posts
         this.props.fetchLikes()
         this.props.fetchComments()
     }
-
 
 
     render(){
         
         const photo_url = `${API}${this.props.post.image}`
 
+        //user.likes are likes that have been given to a user's posts so likes.post_id are the post.id of this user's posts
+        //post.likes contains user_id for the creator of the post - not the person that liked it and post_id is post.id
+        //I believe Like model in db needs to take in the current user's id as params to access here
+
+        // console.log(this.props.user.likes.map(like => like.post_id).includes(this.props.post.id))
+
     return (
         <>
-        <Box Reflex style={{border:'solid lightGrey 1px', padding:'20px', margin:'20px'}}>
-            {/* conditional rendering for post username and buttons for each post */}
+        <Box style={{border:'solid lightGrey 1px', padding:'20px', margin:'20px'}}>
+            {/* conditional rendering for displaying username and buttons for each post based on window location */}
             {this.props.location.pathname === '/home' || this.props.location.pathname === '/saved' ?
             <div >
                 <Text style={{fontWeight:'bold'}}>{this.props.post.user ? this.props.post.user.username : this.props.auth.user.username}
                 {/* add conditional rendering to liked and saved buttons to change when user has liked or saved post */}
-                    <Button style={{float:'right'}} compact onClick={() => this.props.addLikes(this.props.post)}><Icon name='like'/></Button>
+                    <Button style={{float:'right'}} compact onClick={() => this.props.addLikes(this.props.post)}><Icon name='heart outline'/></Button>
                     <Button style={{float:'right'}} compact onClick={()=> this.props.addToSaved(this.props.post)}><Icon name='bookmark outline'/></Button>
                 </Text>
             </div>
@@ -86,7 +97,7 @@ class Post extends Component {
             </div> 
             }
             
-            <img width={300} src={photo_url} alt={this.props.post.caption}/><br/> 
+            <img width={300} maxHeight={600} src={photo_url} alt={this.props.post.caption}/><br/> 
 
             {this.state.showEditForm === true ? 
                 <EditPostForm showEditForm={this.showEditForm}/>
@@ -105,7 +116,7 @@ class Post extends Component {
                 <Button compact type='submit'>comment</Button>
             </form>
 
-            <div style={{justifyContent:'center', height: '110px', overflow: 'auto'}}>
+            <div style={{justifyContent:'center', height: '110px', width:"350px", overflow: 'auto'}}>
                <Comment key={this.props.post.id} 
                comments={this.props.comments.filter(comments => comments.post_id === this.props.post.id)} />
             </div>
@@ -119,7 +130,8 @@ class Post extends Component {
 const mapStateToProps = state => ({
     comments: state.comments,
     likes: state.likes,
-    auth: state.auth
+    auth: state.auth,
+    user: state.user
 })
 
 export default connect(mapStateToProps, {addComment, fetchLikes, fetchComments, deletePost, postToEdit})(withRouter(Post))

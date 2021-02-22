@@ -1,12 +1,8 @@
 import API from '../API.js'
 
-const BASE_URL = `${API}`
-const SAVED_URL = `${BASE_URL}/saveds`
-const ADD_TO_SAVED = 'ADD_TO_SAVED'
-
+const SAVED_URL = `${API}/saveds`
 
 export const addToSaved = (post) =>  dispatch => {
-    // console.log(post, user)
   
     const saved = {
       user_id: post.user.id,
@@ -23,7 +19,7 @@ export const addToSaved = (post) =>  dispatch => {
       .then(res => res.json())
       .then(saved => 
         dispatch({
-        type: ADD_TO_SAVED,
+        type: 'ADD_TO_SAVED',
         saved
       })
       )

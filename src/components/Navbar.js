@@ -18,6 +18,7 @@ class Navbar extends Component {
 
     search = event => {
         if (event.key === 'Enter'){
+            //pass the search input to post action
         this.props.searchPosts(event.target.value)}
     }
 
@@ -38,10 +39,11 @@ class Navbar extends Component {
                         <Input onKeyDown={this.search} onChange={this.handleChange} name='search' placeholder='Search...' value={this.state.search}/>
                     </Menu.Item>
                     <Dropdown.Menu>
+                    {/* conditional rendering of appropriate menu options based on window location */}
                     {this.props.location.pathname === '/home' ?
                         <Dropdown.Item onClick={this.props.showProfile}>My Posts</Dropdown.Item>
                         :<><Dropdown.Item onClick={this.props.showFeed}>Back to Feed</Dropdown.Item>
-                        {this.props.location.pathname === '/saved' ? 
+                    {this.props.location.pathname === '/saved' ? 
                         <Dropdown.Item onClick={this.props.showProfile}>My Posts</Dropdown.Item>
                         :<Dropdown.Item onClick={this.props.showSaved}>Show Saved</Dropdown.Item>}
                         </>}

@@ -9,6 +9,7 @@ import API from '../API.js'
 class Featured extends Component {
 
     componentDidMount () {
+        //get the top five posts from post actions
         this.props.featuredPosts()
     }
 

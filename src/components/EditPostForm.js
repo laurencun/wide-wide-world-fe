@@ -16,6 +16,7 @@ class EditPostForm extends Component {
 
 
     componentDidUpdate(prevProps, prevState){
+        // populate edit form with post_to_edit info from redux store
         if (this.props.post_to_edit && prevState.location === '') {
             this.setState({
                 location: this.props.post_to_edit.location,
@@ -25,19 +26,18 @@ class EditPostForm extends Component {
     }
 
     handleChange = (event) => {
-        if (event.target.name === 'image' && event.target.files) 
-            this.setState({ image: event.target.files[0] });
-        else {this.setState({
+        //update state on input
+       this.setState({
             [event.target.name]: event.target.value
-        })}
+        })
     }
 
     handleSubmit = (event) => {
         event.preventDefault()
+        //pass state to post actions to update
         this.props.updatePost(this.state)
         this.props.revert(this.state)
         this.setState({
-            image: '', 
             location: '',
             caption: ''
         })
@@ -60,8 +60,7 @@ class EditPostForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  post_to_edit: state.post_to_edit,
-  auth: state.auth
+  post_to_edit: state.post_to_edit
 })
 
 export default connect(mapStateToProps, {updatePost, revert})(EditPostForm)
