@@ -9,6 +9,7 @@ import Profile from './components/Profile';
 import Saved from './components/Saved';
 import { connect } from 'react-redux'
 import './App.css'
+import API from './API.js'
 
 
 
@@ -28,7 +29,7 @@ class App extends Component {
         }
       }
 
-      fetch('http://localhost:3000/current_user', reqObj)
+      fetch(`${API}/current_user`, reqObj)
       .then(resp => resp.json())
       .then(data => {
         this.props.currentUser(data)
