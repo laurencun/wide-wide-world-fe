@@ -14,7 +14,6 @@ import {addToSaved} from '../actions/saved_actions'
 import {currentUser, logoutUser} from '../actions/auth'
 import {findUser} from '../actions/user_actions'
 import {withRouter} from 'react-router-dom'
-import {Flex} from 'rebass'
 
 class PostContainer extends Component {
 
