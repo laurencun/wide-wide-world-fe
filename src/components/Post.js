@@ -116,7 +116,7 @@ class Post extends Component {
                 <Button compact type='submit'>comment</Button>
             </form>
 
-            <div style={{justifyContent:'center', height: '110px', width:"350px", overflow: 'auto'}}>
+            <div style={{justifyContent:'center', height: '110px', width:"300px", overflow: 'auto'}}>
                <Comment key={this.props.post.id} 
                comments={this.props.comments.filter(comments => comments.post_id === this.props.post.id)} />
             </div>
