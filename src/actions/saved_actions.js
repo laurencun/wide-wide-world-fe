@@ -15,6 +15,7 @@ export const addToSaved = (post) =>  dispatch => {
       }, 
       body: JSON.stringify(saved)
       }
+      console.log(saved)
       fetch(SAVED_URL, reqObj)
       .then(res => res.json())
       .then(saved => 
