@@ -93,14 +93,14 @@ export const searchPosts = (params) => dispatch => {
   )
 }
 
-export const savedPosts = () => (dispatch, getState) => {
+export const savedPosts = (id) => dispatch => {
   // filter posts saved by current user
   fetch(POST_URL)
   .then(res => res.json())
   .then(posts => 
     dispatch({
       type: 'SAVED_POSTS',
-      posts: posts.filter(post => post.saveds.some(saved => saved.user_id === getState().auth.user.id))
+      posts: posts.filter(post => post.saveds.some(saved => saved.user_id === id))
     })
   )
 }
