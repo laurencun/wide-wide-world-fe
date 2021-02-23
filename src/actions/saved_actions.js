@@ -2,10 +2,10 @@ import API from '../API.js'
 
 const SAVED_URL = `${API}/saveds`
 
-export const addToSaved = (post, id) =>  dispatch => {
+export const addToSaved = (post) =>  dispatch => {
   
     const saved = {
-      user_id: id,
+      user_id: post.user.id,
       post_id: post.id}
   
     const reqObj = {
