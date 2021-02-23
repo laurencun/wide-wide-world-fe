@@ -100,7 +100,7 @@ export const savedPosts = () => (dispatch, getState) => {
   .then(posts => 
     dispatch({
       type: 'SAVED_POSTS',
-      posts: posts.filter(post => post.saveds.some(saved => saved.user_id === 2))
+      posts: posts.filter(post => post.saveds.some(saved => saved.user_id === getState().auth.user.id))
     })
   )
 }
