@@ -86,7 +86,7 @@ class Post extends Component {
                 <Text style={{fontWeight:'bold'}}>{this.props.post.user ? this.props.post.user.username : this.props.auth.user.username}
                 {/* add conditional rendering to liked and saved buttons to change when user has liked or saved post */}
                     <Button style={{float:'right'}} compact onClick={() => this.props.addLikes(this.props.post)}><Icon name='heart outline'/></Button>
-                    <Button style={{float:'right'}} compact onClick={()=> this.props.addToSaved(this.props.post)}><Icon name='bookmark outline'/></Button>
+                    <Button style={{float:'right'}} compact onClick={()=> this.props.addToSaved(this.props.post, this.props.auth.user.id)}><Icon name='bookmark outline'/></Button>
                 </Text>
             </div>
             

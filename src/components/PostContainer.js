@@ -47,7 +47,7 @@ class PostContainer extends Component {
           if (window.location.href.split('/')[3] === 'profile') { 
             this.props.userPosts()}
           else if (window.location.href.split('/')[3] === 'saved') {
-            this.props.savedPosts(this.props.auth.user.id)}
+            this.props.savedPosts()}
           else
             {this.props.fetchPosts()
               this.props.findUser()}
