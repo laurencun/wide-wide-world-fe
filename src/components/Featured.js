@@ -21,8 +21,8 @@ class Featured extends Component {
 
                     return (
         
-                        <Card>
-                            <img width={500} src={photo_url} alt={props.item.caption}/><br/>
+                        <Card style={{textAlign: 'center'}}>
+                            <img style={{width: '50%', maxWidth: '80vw'}} src={photo_url} alt={props.item.caption}/><br/>
                             <h2 style={{fontFamily:'Playfair'}}>{props.item.location}</h2>
                         </Card>
                     
@@ -30,7 +30,10 @@ class Featured extends Component {
                 }
 
         return (
-            <div style={{display:'flex', justifyContent:'center', alignItems:'center', padding:"20px"}}>
+            <div style={{justifyContent:'center', alignItems:'center', padding:"20px 20px", maxWidth:'100vw'}}>
+
+            <h2 style={{textAlign: 'center', fontFamily:'Playfair'}}>Popular Destinations</h2>
+
              <Carousel >
             {
                 this.props.posts.map( (item, i) => <Item key={i} item={item} /> )

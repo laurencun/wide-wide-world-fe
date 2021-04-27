@@ -16,7 +16,8 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router> 
+      {/* <Navbar store={store}/> */}
       <App />
     </Router>
   </Provider>,

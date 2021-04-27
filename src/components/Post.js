@@ -16,6 +16,8 @@ import {postToEdit} from '../actions/post_to_edit.actions'
 import { Button, Icon } from 'semantic-ui-react'
 import {Box, Text} from 'rebass'
 
+import Popup from 'reactjs-popup'
+
 
 class Post extends Component {
 
@@ -97,7 +99,14 @@ class Post extends Component {
             </div> 
             }
             
-            <img width={300} maxHeight={600} src={photo_url} alt={this.props.post.caption}/><br/> 
+            <Popup trigger={<img style={{position:'relative', padding:'5px', width:'100%'}} src={photo_url} alt={this.props.post.caption}/>} position="center" width="40vw">
+                <div style={{border:'solid lightGrey 20px', position:'relative', textAlign:'center', top:'20vh', maxWidth:'50vh'}}>
+                    <img style={{width:'100%'}} src={photo_url} alt={this.props.post.caption}/>
+                    <h2 style={{width:'inherit', textAlign:'center', margin:'0px', backgroundColor:'lightGrey'}}>Click elsewhere to close pop-up.</h2>
+                </div>
+            </Popup><br/>
+
+            {/* <a href={photo_url} target="_blank"><img style={{position:'relative', padding:'5px', width:'100%'}} src={photo_url} alt={this.props.post.caption}/></a><br/>  */}
 
             {this.state.showEditForm === true ? 
                 <EditPostForm showEditForm={this.showEditForm}/>
@@ -116,7 +125,7 @@ class Post extends Component {
                 <Button compact type='submit'>comment</Button>
             </form>
 
-            <div style={{justifyContent:'center', height: '110px', width:"300px", overflow: 'auto'}}>
+            <div style={{justifyContent:'center', height: '110px', width:"100%", overflow: 'auto'}}>
                <Comment key={this.props.post.id} 
                comments={this.props.comments.filter(comments => comments.post_id === this.props.post.id)} />
             </div>

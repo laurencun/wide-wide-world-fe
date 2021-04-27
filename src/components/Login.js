@@ -53,14 +53,16 @@ class Login extends Component {
 
         return (
 
-           <div style={{justifyContent:'center', justifyItems:'center'}}>
+           <div class="login" style={{justifyContent:'center', justifyItems:'center'}}>
               <h1 style={{fontFamily: 'Major Mono Display, monospace'}} >Wide Wide World</h1> 
               
                   {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
                   
-                  <Flex flexWrap='wrap' justifyContent='center'>
+                  <Flex flexWrap='wrap' justifyContent='center' border="1px" solid="black" backgroundColor='#ffbb33' height="90vh" >
+
+                  <Box style={{padding:'2vh', textAlign: 'center'}}><h2>Welcome to Wide Wide World, a visual forum for seekers of international exploration. You don't have to be a professional photographer to share your adventures. Create a new account or sign-in below to treat yourself to a virtual vacation or share a recent experience.</h2></Box>
                   
-                  <Box  width={1} style={{border:'1px solid black', backgroundColor:'#ffbb33', display:'flex', justifyContent:'center', justifyItems:'center'}}>
+                  <Box style={{border:'1px solid black', backgroundColor:'#ffbb33', justifyContent:'center', justifyItems:'center', textAlign:'center', height:'fit-content', width:'80vw'}}>
                       <form onSubmit={this.login}>
                       
                         <h2 style={{justifyContent: 'center', fontFamily:'Playfair'}}>Share and Explore</h2><br/>
@@ -74,7 +76,7 @@ class Login extends Component {
                       
                       </form>
                   </Box>
-                  
+
                   <Featured/>
                 
                 </Flex>                

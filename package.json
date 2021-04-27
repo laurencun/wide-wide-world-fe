@@ -28,6 +28,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-sticky-nav": "^4.0.6",
+    "reactjs-popup": "^2.0.4",
     "rebass": "^4.0.7",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
@@ -62,6 +63,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
     "gh-pages": "^3.1.0"
   }
 }
