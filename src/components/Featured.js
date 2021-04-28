@@ -30,13 +30,13 @@ class Featured extends Component {
                 }
 
         return (
-            <div style={{justifyContent:'center', alignItems:'center', padding:"20px 20px", maxWidth:'100vw'}}>
+            <div style={{justifyContent:'center', alignItems:'center', padding:"20px 20px", maxWidth:'100vw', height:'70vh'}}>
 
             <h2 style={{textAlign: 'center', fontFamily:'Playfair'}}>Popular Destinations</h2>
 
-             <Carousel >
+             <Carousel>
             {
-                this.props.posts.map( (item, i) => <Item key={i} item={item} /> )
+                this.props.posts.map( (item, i) => <Item key={i} item={item}/> )
             }
             </Carousel>
             </div>

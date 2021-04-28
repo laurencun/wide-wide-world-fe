@@ -58,18 +58,16 @@ class Login extends Component {
               
                   {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
                   
-                  <Flex flexWrap='wrap' justifyContent='center' border="1px" solid="black" backgroundColor='#ffbb33' height="90vh" >
+                  <Flex flexWrap='wrap' justifyContent='center' border="1px" solid="black" backgroundColor='#ffbb33' height="100%" >
 
-                  <Box style={{padding:'2vh', textAlign: 'center'}}><h2>Welcome to Wide Wide World, a visual forum for seekers of international exploration. You don't have to be a professional photographer to share your adventures. Create a new account or sign-in below to treat yourself to a virtual vacation or share a recent experience.</h2></Box>
+                  <Box><h2 style={{padding:'20px', textAlign: 'center', fontFamily:'Playfair'}}>Welcome to Wide Wide World, a visual forum for seekers of international exploration. You don't have to be a professional photographer to share your adventures. Create a new account or sign-in below to treat yourself to a virtual vacation or share a recent experience.</h2></Box>
                   
-                  <Box style={{border:'1px solid black', backgroundColor:'#ffbb33', justifyContent:'center', justifyItems:'center', textAlign:'center', height:'fit-content', width:'80vw'}}>
+                  <Box style={{border:'1px solid black', backgroundColor:'#fff', justifyContent:'center', justifyItems:'center', textAlign:'center', height:'fit-content', width:'100vw'}}>
                       <form onSubmit={this.login}>
-                      
-                        <h2 style={{justifyContent: 'center', fontFamily:'Playfair'}}>Share and Explore</h2><br/>
-                          
+                          <div style={{paddingTop:'20px'}}>                     
                           <input style={{padding:5}} onChange={this.handleChange} name='username' type='text' placeholder="Username" value={this.state.username}/><br/><br/>
                           <input style={{padding:5}} onChange={this.handleChange} name='password' type='password' placeholder="Password" value={this.state.password}/><br/><br/>
-                          
+                          </div> 
                           <Button style={{padding:10, margin:10, color:'black'}} type='submit'>Enter</Button>
 
                           <Link to="/signup" style={{fontFamily: 'Playfair', textDecoration: 'underline', color:'black'}}>Create Account</Link>
