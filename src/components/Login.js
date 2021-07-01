@@ -60,7 +60,7 @@ class Login extends Component {
                   
                   <Flex flexWrap='wrap' justifyContent='center' border="1px" solid="black" height="100%" >
 
-                  <Box><h3 style={{padding:'20px', width:'80vw', textAlign: 'center', fontFamily:'Playfair'}}>Welcome to Wide Wide World, a visual forum for seekers of international exploration. You don't have to be a professional photographer to share your adventures. Create a new account or sign-in below to treat yourself to a virtual vacation or share a recent experience.</h3></Box>
+                  <Box><h2 style={{padding:'20px', width:'80vw', textAlign: 'center', fontFamily:'Playfair'}}>Welcome to Wide Wide World, a visual forum for seekers of international exploration. You don't have to be a professional photographer to share your adventures. Create a new account or sign-in below to treat yourself to a virtual vacation or share a recent experience.</h2></Box>
                   
                   <Box style={{border:'1px solid black', backgroundColor:'#fff', justifyContent:'center', justifyItems:'center', textAlign:'center', height:'fit-content', width:'100vw'}}>
                       <form onSubmit={this.login}>
