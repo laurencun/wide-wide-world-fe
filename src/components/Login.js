@@ -58,7 +58,7 @@ class Login extends Component {
               
                   {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
                   
-                  <Flex flexWrap='wrap' justifyContent='center' border="1px" solid="black" backgroundColor='#ffbb33' height="100%" >
+                  <Flex flexWrap='wrap' justifyContent='center' border="1px" solid="black" height="100%" >
 
                   <Box><h3 style={{padding:'20px', width:'80vw', textAlign: 'center', fontFamily:'Playfair'}}>Welcome to Wide Wide World, a visual forum for seekers of international exploration. You don't have to be a professional photographer to share your adventures. Create a new account or sign-in below to treat yourself to a virtual vacation or share a recent experience.</h3></Box>
                   
