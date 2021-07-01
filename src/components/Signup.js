@@ -57,7 +57,7 @@ class Signup extends Component {
         <div style={{display:'flex', justifyContent:'center', justifyItems:'center'}}>
         {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
         <Flex flexWrap='wrap'>
-            <Box style={{marginTop:'30vh', border:'1px solid black', backgroundColor:'#ffbb33', padding:'20px'}}>
+            <Box style={{marginTop:'30vh', border:'1px solid black', padding:'20px'}}>
             
                 <form onSubmit={this.signup} style={{justifyContent:'center', justifyItems:'center'}}>
                   <h2 style={{fontFamily:'Playfair'}}>Adventure Awaits...</h2><br/>
