@@ -30,7 +30,7 @@ class Featured extends Component {
                 }
 
         return (
-            <div style={{justifyContent:'center', alignItems:'center', padding:"20px 20px", maxWidth:'100vw', height:'70vh'}}>
+            <div style={{justifyContent:'center', alignItems:'center', padding:"20px 20px", maxWidth:'500px', height:'500px'}}>
 
             <h2 style={{textAlign: 'center', fontFamily:'Playfair'}}>Popular Destinations</h2>
 
