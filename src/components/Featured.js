@@ -32,7 +32,7 @@ class Featured extends Component {
         return (
             <div style={{justifyContent:'center', alignItems:'center', padding:"20px 20px", maxWidth:'50vw', height:'50vh'}}>
 
-            <h2 style={{textAlign: 'center', fontFamily:'Playfair'}}>Popular Destinations</h2>
+            <h2 style={{textAlign: 'center', fontFamily:'Playfair'}}>Featured Posts</h2>
 
              <Carousel>
             {
